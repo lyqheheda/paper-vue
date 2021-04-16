@@ -2,6 +2,16 @@
   <div class="mcontaner">
     <Header></Header>
 
+    <div style="margin-top: 15px;">
+  <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
+    <el-select style='width:150px;' v-model="select" slot="prepend" placeholder="请选择">
+      <el-option label="论文标题" value="1"></el-option>
+      <el-option label="作者" value="2"></el-option>
+      <el-option label="关键词" value="3"></el-option>
+    </el-select>
+    <el-button slot="append" icon="el-icon-search"></el-button>
+  </el-input>
+</div>
     <div class="block">
       <el-timeline>
 
@@ -43,7 +53,9 @@
         blogs: {},
         currentPage: 1,
         total: 0,
-        pageSize: 5
+        pageSize: 5,
+        input3: '',
+        select: ''
       }
     },
     methods: {
@@ -70,6 +82,10 @@
   .mpage {
     margin: 0 auto;
     text-align: center;
+  }
+
+  .input-with-select  {
+    background-color: #fff;
   }
 
 </style>

@@ -3,14 +3,18 @@
     <Header></Header>
 
     <div style="margin-top: 15px;">
-  <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
-    <el-select style='width:150px;' v-model="select" slot="prepend" placeholder="请选择">
-      <el-option label="论文标题" value="1"></el-option>
-      <el-option label="作者" value="2"></el-option>
-      <el-option label="关键词" value="3"></el-option>
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
+        <el-form-item  prop='input'>
+  <el-input placeholder="请输入内容" v-model="ruleForm.input" class="input-with-select">
+    <el-select style='width:150px;' v-model="ruleForm.select" slot="prepend" placeholder="请选择">
+      <el-option label="paper title" value="paper_title" ></el-option>
+      <el-option label="author" value="author"></el-option>
+      <el-option label="keyword" value="keyword"></el-option>
     </el-select>
-    <el-button slot="append" icon="el-icon-search"></el-button>
+    <el-button  @click="submitForm('ruleForm')" slot="append" icon="el-icon-search"></el-button>
   </el-input>
+        </el-form-item>
+      </el-form>
 </div>
     <div class="block">
       <el-timeline>
@@ -22,7 +26,8 @@
                 {{blog.title}}
               </router-link>
             </h4>
-            <p>{{blog.description}}</p>
+            <p>author: {{blog.author}}</p>
+            <p>keywords: {{blog.keyword}}</p>
           </el-card>
         </el-timeline-item>
 
@@ -50,15 +55,52 @@
     components: {Header},
     data() {
       return {
-        blogs: {},
+       // blogs: {},
+       blogs:[{id:11,
+      userId:1,
+      title:"1111",
+      description:"111",
+      content:"111",
+      author:"11",
+      keyword:"11",
+      created:'2020-4-3T10:23:23',
+      status:0
+      }],
         currentPage: 1,
         total: 0,
         pageSize: 5,
-        input3: '',
-        select: ''
+
+        ruleForm: {
+          input: '',
+          select: 'paper_title'
+        },
+        rules: {
+          input: [
+            { required: true, message:'Nothing is entered',trigger: 'blur' },
+            
+          ],
+        
       }
+    }
     },
     methods: {
+      submitForm(formName) {
+        console.log(this.ruleForm)
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            const _this = this
+            this.$axios.post('/login', this.ruleForm).then(res => {
+
+              console.log(res.data)
+              //
+            })
+
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
       page(currentPage) {
         const _this = this
         _this.$axios.get("/blogs?currentPage=" + currentPage).then(res => {

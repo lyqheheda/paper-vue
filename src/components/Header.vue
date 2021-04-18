@@ -13,6 +13,9 @@
 
       <el-divider direction="vertical"></el-divider>
       <span v-show="!hasLogin"><el-link type="primary" href="/login">登录</el-link></span>
+      <el-divider direction="vertical"></el-divider>
+      <span v-show="!hasLogin"><el-link type="info" href="/register">注册</el-link></span>
+
 
       <span v-show="hasLogin"><el-link type="danger" @click="logout">退出</el-link></span>
     </div>

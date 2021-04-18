@@ -6,7 +6,7 @@
 
 <style>
   #app {
-    max-width: 960px;
+    width: 1200px;
     margin: 0 auto;
   }
 </style>

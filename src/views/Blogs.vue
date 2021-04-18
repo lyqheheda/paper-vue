@@ -48,7 +48,7 @@
 </template>
 
 <script>
-  import Header from "../components/Header";
+  import Header from "../components/Header_new";
 
   export default {
     name: "Blogs.vue",
@@ -78,9 +78,9 @@
         rules: {
           input: [
             { required: true, message:'Nothing is entered',trigger: 'blur' },
-            
+
           ],
-        
+
       }
     }
     },

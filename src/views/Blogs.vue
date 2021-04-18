@@ -22,11 +22,11 @@
         <el-timeline-item :timestamp="blog.created" placement="top" v-for="blog in blogs">
           <el-card>
             <h4>
-              <router-link :to="{name: 'BlogDetail', params: {blogId: blog.id}}">
-                {{blog.title}}
+              <router-link :to="{name: 'BlogDetail', params: {blogId: blog.paper_id}}">
+                {{blog.pname}}
               </router-link>
             </h4>
-            <p>author: {{blog.author}}</p>
+            <p>author: {{blog.aname}}</p>
             <p>keywords: {{blog.keyword}}</p>
           </el-card>
         </el-timeline-item>
@@ -56,12 +56,13 @@
     data() {
       return {
        // blogs: {},
-       blogs:[{id:11,
+       blogs:[{
+         paper_id:11,
       userId:1,
-      title:"1111",
-      description:"111",
+      pname:"1111",
+      paperAbstract:"111",
       content:"111",
-      author:"11",
+      aname:"11",
       keyword:"11",
       created:'2020-4-3T10:23:23',
       status:0
@@ -89,10 +90,15 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             const _this = this
-            this.$axios.post('/login', this.ruleForm).then(res => {
-
+            this.$axios.post('/search', this.ruleForm).then(res => {//这个接口对吗
+              console.log(_this.ruleForm)
               console.log(res.data)
-              //
+              //试一下 这个行不？
+              _this.blogs = res.data.data.records
+          _this.currentPage = res.data.data.current
+          _this.total = res.data.data.total
+          _this.pageSize = res.data.data.size
+
             })
 
           } else {

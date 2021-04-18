@@ -1,5 +1,5 @@
 <template>
-  <div class="mcontaner">
+  <div class="mcontaner" style="width: 1200px;">
     <Header></Header>
 
     <div style="margin-top: 15px;">
@@ -15,7 +15,7 @@
   </el-input>
         </el-form-item>
       </el-form>
-</div>
+    </div>
     <div class="block">
       <el-timeline>
 

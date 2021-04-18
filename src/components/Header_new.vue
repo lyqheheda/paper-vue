@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
       <div >
         <img class="mylogo" src="https://www.markerhub.com/dist/images/logo/markerhub-logo.png" alt="">
@@ -10,7 +9,8 @@
       <el-menu-item index="3" >审阅管理</el-menu-item>
       <el-menu-item index="4" >校园管理</el-menu-item>
       <el-menu-item index="5" v-if="!hasLogin">
-        <a href="/login">登录|注册</a>
+<!--        <a href="/login">登录|注册</a>-->
+        <a @click="testLogin">登录|注册</a>
       </el-menu-item>
 
       <el-submenu index="5" v-else>
@@ -30,6 +30,8 @@
         <el-menu-item index="5-3">我的收藏</el-menu-item>
         <el-menu-item index="5-4">权限管理</el-menu-item>
         <el-menu-item index="5-5">系统设置</el-menu-item>
+        <el-menu-item index="5-5" @click="logout">退出登录</el-menu-item>
+
         <el-menu-item index="5-6" v-if="admin">系统管理</el-menu-item>
       </el-submenu>
     </el-menu>
@@ -43,7 +45,7 @@ export default {
   name: "Header_new",
   data() {
     return {
-      activeIndex: '1',
+      activeIndex: '',
       user: {
         username: 'unknown',
         avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
@@ -58,17 +60,21 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
-    logout() {
-      const _this = this
-      _this.$axios.get("/logout", {
-        headers: {
-          "Authorization": localStorage.getItem("token")
-        }
-      }).then(res => {
-        _this.$store.commit("REMOVE_INFO")
-        _this.$router.push("/login")
 
-      })
+    logout() {
+      this.hasLogin = false;
+      // const _this = this
+      // _this.$axios.get("/logout", {
+      //   headers: {
+      //     "Authorization": localStorage.getItem("token")
+      //   }
+      // }).then(res => {
+      //   _this.$store.commit("REMOVE_INFO")
+      //   _this.$router.push("/login")
+      // })
+    },
+    testLogin() {
+      this.hasLogin = true;
     }
   },
   created() {
@@ -87,8 +93,9 @@ export default {
 .mylogo {
   width: 15%;
   float: left;
+  margin-left: 5px;
   margin-top: 10px;
-  margin-right: 400px;
+  margin-right: 530px;
 }
 
 </style>

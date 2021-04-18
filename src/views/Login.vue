@@ -1,10 +1,8 @@
 <template>
   <div>
+    <Header></Header>
 
     <el-container>
-      <el-header>
-        <img class="mlogo" src="https://www.markerhub.com/dist/images/logo/markerhub-logo.png" alt="">
-      </el-header>
       <el-main>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
           <el-form-item label="用户名" prop="username">
@@ -17,10 +15,8 @@
           <el-form-item>
             <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
             <el-button @click="resetForm('ruleForm')">重置</el-button>
-            <el-button @click="resetForm('ruleForm')">重置</el-button>
           </el-form-item>
         </el-form>
-
       </el-main>
     </el-container>
 
@@ -28,8 +24,11 @@
 </template>
 
 <script>
+  import Header from "../components/Header_new";
+
   export default {
     name: "Login",
+    components: {Header},
     data() {
       return {
         ruleForm: {

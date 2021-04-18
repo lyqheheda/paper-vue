@@ -91,7 +91,7 @@
           if (valid) {
             const _this = this
             this.$axios.post('/search', this.ruleForm).then(res => {//这个接口对吗
-              console.log(_this.ruleForm)
+              
               console.log(res.data)
               //试一下 这个行不？
               _this.blogs = res.data.data.records

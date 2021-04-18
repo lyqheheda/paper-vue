@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 
 
-axios.defaults.baseURL = "http://localhost:8081"
+//axios.defaults.baseURL = "10.129.158.217:9000/"
 
 // 前置拦截
 axios.interceptors.request.use(config => {

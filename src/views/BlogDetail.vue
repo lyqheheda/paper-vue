@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header></Header>
-
+    详情
     <div class="mblog">
       <h2> {{ blog.title }}</h2>
       <el-link icon="el-icon-edit" v-if="ownBlog">
@@ -30,6 +30,7 @@
           id: "",
           title: "",
           content: ""
+          
         },
         ownBlog: false
       }

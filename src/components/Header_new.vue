@@ -10,7 +10,10 @@
       <el-menu-item index="3" >审阅管理</el-menu-item>
       <el-menu-item index="4" >校园管理</el-menu-item>
       <el-menu-item index="5" v-if="!hasLogin">
-        <a href="/login">登录|注册</a>
+        <a href="/login">登录</a>
+      </el-menu-item>
+      <el-menu-item index="6" v-if="!hasLogin">
+        <a href="/register">注册</a>
       </el-menu-item>
 
       <el-submenu index="5" v-else>

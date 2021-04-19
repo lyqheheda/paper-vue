@@ -4,7 +4,9 @@
       <div >
         <img class="mylogo" src="https://www.markerhub.com/dist/images/logo/markerhub-logo.png" alt="">
       </div>
-      <el-menu-item index="1" >论文首页</el-menu-item>
+      <el-menu-item index="1" >
+        <router-link :to="{name: 'Blogs'}">论文首页</router-link>
+      </el-menu-item>
       <el-menu-item index="2" >发表管理</el-menu-item>
       <el-menu-item index="3" >审阅管理</el-menu-item>
       <el-menu-item index="4" >校园管理</el-menu-item>

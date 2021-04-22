@@ -1,8 +1,8 @@
 <template>
   <div class="mcontaner" style="width: 1200px;">
-    <Header></Header>
+    <Header :showLogin='true'></Header>
 
-    <div style="margin-top: 15px;">
+    <div style="margin-top: 15px;" class="search">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
         <el-form-item  prop='input'>
   <el-input placeholder="请输入内容" v-model="ruleForm.input" class="input-with-select">

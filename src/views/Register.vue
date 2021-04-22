@@ -9,13 +9,13 @@
   
   <el-form-item label="user type" prop="rname">
     <el-select v-model="registerForm.rname" placeholder="please select">
-      <!-- C代表作者 -->
-      <el-option label="author" value="C"></el-option> 
+      <!-- A代表作者 -->
+      <el-option label="author" value="A"></el-option> 
 <!-- B代表审稿人 -->
       <el-option label="reviewer" value="B"></el-option>
     </el-select>
   </el-form-item>
-  <el-form-item label="Author id"  prop="aut_id" v-if="registerForm.rname==='C'">
+  <el-form-item label="Author id"  prop="aut_id" v-if="registerForm.rname==='A'">
     <el-input v-model="registerForm.aut_id"></el-input>
   </el-form-item>
   <el-form-item label="user name" prop="uname">
@@ -23,6 +23,12 @@
   </el-form-item>
   <el-form-item label="password" prop="password">
     <el-input v-model="registerForm.password"></el-input>
+  </el-form-item>
+  <el-form-item label="firstname" prop="firstname">
+    <el-input v-model="registerForm.firstname"></el-input>
+  </el-form-item>
+  <el-form-item label="lastname" prop="lastname">
+    <el-input v-model="registerForm.lastname"></el-input>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="submitForm('registerForm')">立即创建</el-button>
@@ -42,7 +48,9 @@
           aut_id: '',
           uname:'',
           password:'',
-          rname: '', //权限名称，B代表审稿人，C代表作者
+          rname: '', //权限名称，A代表作者,B审稿人，C代表两者都是
+          firstname:'',
+          lastname:'',
           
         },
         rules: {
@@ -58,6 +66,12 @@
           password: [
             { required: true, message: 'Please enter', trigger: 'blur' },
           ],
+          firstname:[
+            { required: true, message: 'Please enter', trigger: 'blur' },
+          ],
+          lastname:[
+            { required: true, message: 'Please enter', trigger: 'blur' },
+          ],
           
         }
       };
@@ -69,12 +83,13 @@
             alert('submit!');
             const _this = this
             this.$axios.post('/register', this.registerForm).then(res => {
-            //处理一下用户名重复
+            
             if(res.data.isRegistered){
               _this.$router.push("/blogs")
 
             }
             else {
+              //注册失败显示原因
               alert(res.data.data)
             }
 

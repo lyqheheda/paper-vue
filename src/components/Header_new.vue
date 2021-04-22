@@ -8,13 +8,15 @@
         <router-link :to="{name: 'Blogs'}">论文首页</router-link>
       </el-menu-item>
       <el-menu-item index="2" >发表管理</el-menu-item>
-      <el-menu-item index="3" >审阅管理</el-menu-item>
+      <el-menu-item index="3" ><a href="/reviewer">审阅管理</a></el-menu-item>
       <el-menu-item index="4" >校园管理</el-menu-item>
-      <el-menu-item index="5" v-if="!hasLogin">
-        <a href="/login" @click="testLogin">登录</a>
+      <el-menu-item index="5" v-if="!hasLogin" v-show='showLogin'>
+       <a href="/login">登录</a>
+        <!-- <a @click="testLogin">登录</a> -->
       </el-menu-item>
       <el-menu-item index="6" v-if="!hasLogin">
-        <a href="/register" @click="testLogin">注册</a>
+       <a href="/register">注册</a>
+        <!-- <a @click="testLogin">登录|注册</a> -->
       </el-menu-item>
 
       <el-submenu index="5" v-else>
@@ -47,6 +49,7 @@
 <script>
 export default {
   name: "Header_new",
+  props:['showLogin'],
   data() {
     return {
       activeIndex: '',

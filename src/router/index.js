@@ -5,6 +5,7 @@ import Blogs from '../views/Blogs.vue'
 import BlogEdit from '../views/BlogEdit.vue'
 import BlogDetail from '../views/BlogDetail.vue'
 import Register from '../views/Register.vue'
+import Reviewer from '../views/Reviewer.vue'
 
 Vue.use(VueRouter)
 
@@ -49,7 +50,12 @@ const routes = [
     meta: {
       requireAuth: true
     }
-  }
+  },
+  {
+    path: '/reviewer',
+    name: 'Reviewer',
+    component: Reviewer
+  },
 ]
 
 const router = new VueRouter({

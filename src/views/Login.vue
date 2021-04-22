@@ -1,8 +1,11 @@
 <template>
   <div>
-    <Header></Header>
+    <!-- <Header :showLogin='false' ></Header> -->
 
     <el-container>
+      <el-header>
+        <img class="mlogo" src="https://www.markerhub.com/dist/images/logo/markerhub-logo.png" alt="">
+      </el-header>
       <el-main>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
           <el-form-item label="用户名" prop="username">
@@ -32,8 +35,8 @@
     data() {
       return {
         ruleForm: {
-          username: 'markerhub',
-          password: '111111'
+          username: 'team8-1',
+          password: '1'
         },
         rules: {
           username: [
@@ -52,10 +55,12 @@
           if (valid) {
             const _this = this
             this.$axios.post('/login', this.ruleForm).then(res => {
-
+              
+              console.log('======')
               console.log(res.data)
+              console.log('======')
               const jwt = res.headers['authorization']
-              const userInfo = res.data.data
+              const userInfo = res.data.data   //////////////////////这一行里存了用户权限信息
 
               // 把数据共享出去
               _this.$store.commit("SET_TOKEN", jwt)

@@ -6,9 +6,13 @@ import store from './store'
 
 //axios.defaults.baseURL = "http://10.129.158.217:9000"
 
-// 前置拦截
+// 前置拦截，转换get请求的数组形式
 axios.interceptors.request.use(config => {
-  return config
+  if (config.method === 'get') {
+    config.paramsSerializer = function(params) {
+      return qs.stringify(params, { arrayFormat: 'repeat' })
+    }
+ }
 })
 
 axios.interceptors.response.use(response => {

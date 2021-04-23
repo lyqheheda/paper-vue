@@ -29,7 +29,35 @@
       </el-aside>
       <el-main>
         <div>
-          
+          <el-table
+    :data="tableData"
+    stripe
+    style="width: 80%">
+    <el-table-column
+      prop="pname"
+      label="paper title"
+      width="150">
+    </el-table-column>
+    <el-table-column
+      prop="category"
+      label="category"
+      width="150">
+    </el-table-column>
+     <el-table-column
+      prop="authorName"
+      label="author"
+      width="150">
+    </el-table-column>
+     <el-table-column
+      prop="publicID"
+      label="state"
+      width="150">
+    </el-table-column>
+    <el-table-column
+      prop="operation"
+      label="operation">
+    </el-table-column>
+  </el-table>
         </div>
 
 
@@ -83,6 +111,13 @@ export default {
       pageSize: 5,
       paperList:[],
       rev_id:0,
+      tableData: [{
+          pname: 'placeholder',
+          category:'placeholder',
+          authorName:'placeholder',
+          publicID:123123,
+          operation:'placeholder'
+        }]
 
     };
   },

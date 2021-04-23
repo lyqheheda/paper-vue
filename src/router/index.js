@@ -6,6 +6,7 @@ import BlogEdit from '../views/BlogEdit.vue'
 import BlogDetail from '../views/BlogDetail.vue'
 import Register from '../views/Register.vue'
 import Reviewer from '../views/Reviewer.vue'
+import Test from '../views/Test.vue'
 
 Vue.use(VueRouter)
 
@@ -55,6 +56,11 @@ const routes = [
     path: '/reviewer',
     name: 'Reviewer',
     component: Reviewer
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: Test
   },
 ]
 

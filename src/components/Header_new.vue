@@ -1,25 +1,28 @@
 <template>
   <div>
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-      <div >
-        <img class="mylogo" src="https://www.markerhub.com/dist/images/logo/markerhub-logo.png" alt="">
+      <div>
+        <img alt="Website Logo" class="mylogo" src="../assets/myLogo.gif">
       </div>
-      <el-menu-item index="1" >
-        <router-link :to="{name: 'Blogs'}">论文首页</router-link>
+      <el-menu-item index="1">
+        <router-link :to="{name: 'Blogs'}" class="Page_title">论文首页</router-link>
       </el-menu-item>
-      <el-menu-item index="2" >发表管理</el-menu-item>
-      <el-menu-item index="3" ><a href="/reviewer">审阅管理</a></el-menu-item>
-      <el-menu-item index="4" >校园管理</el-menu-item>
-      <el-menu-item index="5" v-if="!hasLogin" v-show='showLogin'>
-       <a href="/login">登录</a>
+      <el-menu-item index="2">
+        <a class="Page_title" href="/author" v-bind:disabled="isAuther">发表管理</a>
+      </el-menu-item>
+      <el-menu-item index="3">
+        <a class="Page_title" href="/reviewer" v-bind:disabled="isRevier">审阅管理</a></el-menu-item>
+      <el-menu-item class="Page_title" index="4">校园管理</el-menu-item>
+      <el-menu-item v-if="!hasLogin" v-show='showLogin' index="5">
+        <a class="Page_title" href="/login">登录</a>
         <!-- <a @click="testLogin">登录</a> -->
       </el-menu-item>
-      <el-menu-item index="6" v-if="!hasLogin">
-       <a href="/register">注册</a>
+      <el-menu-item v-if="!hasLogin" index="6">
+        <a class="Page_title" href="/register">注册</a>
         <!-- <a @click="testLogin">登录|注册</a> -->
       </el-menu-item>
 
-      <el-submenu index="5" v-else>
+      <el-submenu v-else index="5">
         <template slot="title">
           <el-avatar :size="40" :src="user.avatar"></el-avatar>
         </template>
@@ -38,7 +41,7 @@
         <el-menu-item index="5-5">系统设置</el-menu-item>
         <el-menu-item index="5-5" @click="logout">退出登录</el-menu-item>
 
-        <el-menu-item index="5-6" v-if="admin">系统管理</el-menu-item>
+        <el-menu-item v-if="admin" index="5-6">系统管理</el-menu-item>
       </el-submenu>
     </el-menu>
     <div class="line"></div>
@@ -49,7 +52,7 @@
 <script>
 export default {
   name: "Header_new",
-  props:['showLogin'],
+  props: ['showLogin'],
   data() {
     return {
       activeIndex: '',
@@ -58,7 +61,7 @@ export default {
         avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
       },
       isAuther: true,
-      isRevier: false,
+      isRevier: true,
       hasLogin: false,
       admin: true
     }
@@ -85,7 +88,7 @@ export default {
     }
   },
   created() {
-    if(this.$store.getters.getUser.username) {
+    if (this.$store.getters.getUser.username) {
       this.user.username = this.$store.getters.getUser.username
       this.user.avatar = this.$store.getters.getUser.avatar
 
@@ -98,11 +101,15 @@ export default {
 
 <style scoped>
 .mylogo {
-  width: 15%;
+  width: 20%;
   float: left;
   margin-left: 5px;
-  margin-top: 10px;
-  margin-right: 530px;
+  /*margin-top: 10px;*/
+  margin-right: 430px;
+}
+
+.Page_title {
+  text-decoration: none;
 }
 
 </style>

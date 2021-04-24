@@ -1,7 +1,6 @@
 <template>
   <div>
     <Header></Header>
-    详情
     <div class="mblog">
       <el-container>
 <!--        头部-->

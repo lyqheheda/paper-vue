@@ -6,26 +6,26 @@
       <el-aside width="200px">
         <div style="margin-top: 15px" class="searchbox">
           <el-input
-            placeholder="关键词"
-            v-model="skeywords"
-            class="input-with-select"
+              placeholder="关键词"
+              v-model="skeywords"
+              class="input-with-select"
           >
             <el-button
-              slot="append"
-              icon="el-icon-search"
-              @click="update"
+                slot="append"
+                icon="el-icon-search"
+                @click="update"
             ></el-button>
           </el-input>
         </div>
 
         <el-checkbox-group v-model="checkList" class="checkbox" >
-          <el-checkbox label="showPassed" @change="update" style="margin-left: 10px"
-            >show reviewed</el-checkbox
-          >
+          <el-checkbox label="showPassed" @change="update" style="margin-left: 10px">
+            show reviewed
+          </el-checkbox>
           <hr style="margin: 5px 0px;color: #E9EEF3">
-          <el-checkbox label="timeOrder" @change="update" style="margin-left: 10px"
-            >order by time</el-checkbox
-          >
+          <el-checkbox label="timeOrder" @change="update" style="margin-left: 10px">
+            order by time
+          </el-checkbox>
         </el-checkbox-group>
       </el-aside>
       <el-main>
@@ -36,7 +36,7 @@
             <el-table-column prop="authorName" label="author" width="230px">
             </el-table-column>
             <el-table-column prop="category" label="category" width="220px">
-          </el-table-column>
+            </el-table-column>
             <el-table-column prop="publicID" label="state" width="100px">
             </el-table-column>
             <!-- <el-table-column prop="operation" label="operation">
@@ -44,10 +44,10 @@
             <el-table-column label="operations" width="100px">
               <template slot-scope="scope">
                 <el-button
-                  @click="handleReview(scope.row)"
-                  type="text"
-                  size="small"
-                  >review</el-button>
+                    @click="handleReview(scope.row)"
+                    type="text"
+                    size="small"
+                >CORRECT</el-button>
 
               </template>
             </el-table-column>
@@ -56,16 +56,16 @@
 
         <div class="block">
           <el-pagination
-            class="mpage"
-            background
-            layout="prev, pager, next"
-            :current-page="currentPage"
-            :page-size="pageSize"
-            :total="total"
-            @current-change="page"
+              class="mpage"
+              background
+              layout="prev, pager, next"
+              :current-page="currentPage"
+              :page-size="pageSize"
+              :total="total"
+              @current-change="page"
           >
           </el-pagination></div
-      ></el-main>
+        ></el-main>
     </el-container>
   </div>
 </template>
@@ -74,7 +74,7 @@
 import Header from "../components/Header_new";
 
 export default {
-  name: "Reviewer",
+  name: "Author",
   components: { Header },
   data() {
     return {
@@ -137,7 +137,7 @@ export default {
         // console.log(row);
         // console.log(this.user.rev_id)
 
-        this.$router.push({name:'PaperReview',
+        this.$router.push({name:'AuthorCorrect',
         query:{rev_id: this.user.rev_id, pap_id:row.pap_id}});
       },
   },
@@ -181,7 +181,7 @@ export default {
 .el-aside {
   background-color: #d3dce6;
   color: #333;
-  height: auto;
+  width: 300px;
   /* text-align: center; */
   /* line-height: 300px; */
 }
@@ -190,7 +190,6 @@ export default {
   /* background-color: #989ea3; */
   color: #333;
   text-align: center;
-  height: auto;
   /* line-height: 160px; */
 }
 
@@ -215,6 +214,5 @@ body > .el-container {
 .checkbox {
   margin: 15px 20px;
 }
-
 
 </style>

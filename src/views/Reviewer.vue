@@ -18,36 +18,37 @@
           </el-input>
         </div>
 
-        <el-checkbox-group v-model="checkList" class="checkbox">
-          <el-checkbox label="showPassed" @change="update"
+        <el-checkbox-group v-model="checkList" class="checkbox" >
+          <el-checkbox label="showPassed" @change="update" style="margin-left: 10px"
             >show reviewed</el-checkbox
           >
-          <el-checkbox label="timeOrder" @change="update"
+          <hr style="margin: 5px 0px;color: #E9EEF3">
+          <el-checkbox label="timeOrder" @change="update" style="margin-left: 10px"
             >order by time</el-checkbox
           >
         </el-checkbox-group>
       </el-aside>
       <el-main>
         <div>
-          <el-table :data="paperList" stripe style="width: 80%">
-            <el-table-column prop="pname" label="paper title" width="150">
+          <el-table :data="paperList" stripe style="margin:10px">
+            <el-table-column prop="pname" label="paper title" width="300px">
             </el-table-column>
-            <el-table-column prop="category" label="category" width="150">
+            <el-table-column prop="authorName" label="author" width="230px">
             </el-table-column>
-            <el-table-column prop="authorName" label="author" width="150">
-            </el-table-column>
-            <el-table-column prop="publicID" label="state" width="150">
+            <el-table-column prop="category" label="category" width="220px">
+          </el-table-column>
+            <el-table-column prop="publicID" label="state" width="100px">
             </el-table-column>
             <!-- <el-table-column prop="operation" label="operation">
             </el-table-column> -->
-            <el-table-column label="operations">
+            <el-table-column label="operations" width="100px">
               <template slot-scope="scope">
-                <el-button 
+                <el-button
                   @click="handleReview(scope.row)"
                   type="text"
                   size="small"
                   >review</el-button>
-                
+
               </template>
             </el-table-column>
           </el-table>
@@ -93,9 +94,9 @@ export default {
           pname: "placeholder",
           category: "placeholder",
           authorName: "placeholder",
-          publicID: 123123,      
+          publicID: 123123,
         },
-        
+
       ],
     };
   },
@@ -135,7 +136,7 @@ export default {
     handleReview(row) {
         // console.log(row);
         // console.log(this.user.rev_id)
-     
+
         this.$router.push({name:'PaperReview',
         query:{rev_id: this.user.rev_id, pap_id:row.pap_id}});
       },
@@ -180,6 +181,7 @@ export default {
 .el-aside {
   background-color: #d3dce6;
   color: #333;
+  height: auto;
   /* text-align: center; */
   /* line-height: 300px; */
 }
@@ -188,6 +190,7 @@ export default {
   /* background-color: #989ea3; */
   color: #333;
   text-align: center;
+  height: auto;
   /* line-height: 160px; */
 }
 

@@ -8,7 +8,8 @@ import Register from '../views/Register.vue'
 import Reviewer from '../views/Reviewer.vue'
 import Test from '../views/Test.vue'
 import PaperReview from '../views/PaperReview.vue'
-import Author from '../views/Author.vue'
+import Author from "../views/Author.vue";
+import AuthorCorrect from "../views/AuthorCorrect.vue";
 
 Vue.use(VueRouter)
 
@@ -74,6 +75,17 @@ const routes = [
     name: 'Test',
     component: Test
   },
+  {
+    path: '/author',
+    name: 'Author',
+    component: Author,
+  },
+  {
+    path: '/author/paperEdit',
+    name: 'AuthorCorrect',
+    component: AuthorCorrect,
+  },
+
 ]
 
 const router = new VueRouter({

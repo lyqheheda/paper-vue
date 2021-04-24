@@ -7,9 +7,8 @@
       <el-menu-item index="1" >
         <router-link :to="{name: 'Blogs'}">论文首页</router-link>
       </el-menu-item>
-      <el-menu-item index="2" >发表管理</el-menu-item>
+      <el-menu-item index="2" ><a href='/author'> 发表管理</a></el-menu-item>
       <el-menu-item index="3" ><a href="/reviewer">审阅管理</a></el-menu-item>
-      <el-menu-item index="4" >校园管理</el-menu-item>
       <el-menu-item index="5" v-if="!hasLogin" v-show='showLogin'>
        <a href="/login">登录</a>
         <!-- <a @click="testLogin">登录</a> -->

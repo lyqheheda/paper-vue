@@ -8,6 +8,7 @@ import Register from '../views/Register.vue'
 import Reviewer from '../views/Reviewer.vue'
 import Test from '../views/Test.vue'
 import PaperReview from '../views/PaperReview.vue'
+import Author from '../views/Author.vue'
 
 Vue.use(VueRouter)
 
@@ -62,6 +63,11 @@ const routes = [
     path: '/reviewer/paperReview',
     name: 'PaperReview',
     component: PaperReview
+  },
+  {
+    path: '/author',
+    name: 'Author',
+    component: Author
   },
   {
     path: '/test',

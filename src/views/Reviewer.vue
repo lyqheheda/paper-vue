@@ -42,13 +42,12 @@
             </el-table-column> -->
             <el-table-column label="operations">
               <template slot-scope="scope">
-                <el-button
+                <el-button 
                   @click="handleReview(scope.row)"
                   type="text"
                   size="small"
-                  >review</el-button
-                >
-                <el-button @click="handleApprove(scope.row)" type="text" size="small">approve</el-button>
+                  >review</el-button>
+                
               </template>
             </el-table-column>
           </el-table>
@@ -134,11 +133,12 @@ export default {
       });
     },
     handleReview(row) {
-        console.log(row);
+        // console.log(row);
+        // console.log(this.user.rev_id)
+     
+        this.$router.push({name:'PaperReview',
+        query:{rev_id: this.user.rev_id, pap_id:row.pap_id}});
       },
-      handleApprove(row) {
-        console.log(row);
-      }
   },
 
   created() {
@@ -212,4 +212,6 @@ body > .el-container {
 .checkbox {
   margin: 15px 20px;
 }
+
+
 </style>

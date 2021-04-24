@@ -18,7 +18,7 @@
           </el-input>
         </div>
 
-        <el-checkbox-group v-model="checkList">
+        <el-checkbox-group v-model="checkList" class="checkbox">
           <el-checkbox label="showPassed" @change="update"
             >show reviewed</el-checkbox
           >
@@ -29,37 +29,30 @@
       </el-aside>
       <el-main>
         <div>
-          <el-table
-    :data="tableData"
-    stripe
-    style="width: 80%">
-    <el-table-column
-      prop="pname"
-      label="paper title"
-      width="150">
-    </el-table-column>
-    <el-table-column
-      prop="category"
-      label="category"
-      width="150">
-    </el-table-column>
-     <el-table-column
-      prop="authorName"
-      label="author"
-      width="150">
-    </el-table-column>
-     <el-table-column
-      prop="publicID"
-      label="state"
-      width="150">
-    </el-table-column>
-    <el-table-column
-      prop="operation"
-      label="operation">
-    </el-table-column>
-  </el-table>
+          <el-table :data="paperList" stripe style="width: 80%">
+            <el-table-column prop="pname" label="paper title" width="150">
+            </el-table-column>
+            <el-table-column prop="category" label="category" width="150">
+            </el-table-column>
+            <el-table-column prop="authorName" label="author" width="150">
+            </el-table-column>
+            <el-table-column prop="publicID" label="state" width="150">
+            </el-table-column>
+            <!-- <el-table-column prop="operation" label="operation">
+            </el-table-column> -->
+            <el-table-column label="operations">
+              <template slot-scope="scope">
+                <el-button
+                  @click="handleReview(scope.row)"
+                  type="text"
+                  size="small"
+                  >review</el-button
+                >
+                <el-button @click="handleApprove(scope.row)" type="text" size="small">approve</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
         </div>
-
 
         <div class="block">
           <el-pagination
@@ -89,56 +82,42 @@ export default {
       skeywords: "",
       user: {
         username: "",
+        rev_id: 0,
       },
-      hasLogin: false,
-
-      // blogs: {},
-      // blogs: [
-      //   {
-      //     paper_id: 11,
-      //     userId: 1,
-      //     pname: "1111",
-      //     paperAbstract: "111",
-      //     content: "111",
-      //     aname: "11",
-      //     keyword: "11",
-      //     created: "2020-4-3T10:23:23",
-      //     status: 0,
-      //   },
-      // ],
+      hasLogin: false, //这个咋用？
       currentPage: 1,
       total: 0,
       pageSize: 5,
-      paperList:[],
-      rev_id:0,
-      tableData: [{
-          pname: 'placeholder',
-          category:'placeholder',
-          authorName:'placeholder',
-          publicID:123123,
-          operation:'placeholder'
-        }]
-
+      paperList: [
+        {
+          pap_id:0,
+          pname: "placeholder",
+          category: "placeholder",
+          authorName: "placeholder",
+          publicID: 123123,      
+        },
+        
+      ],
     };
   },
   methods: {
-    page(currentPage) {
-      const _this = this;
-      _this.$axios.get("/reviewer?currentPage=" + currentPage).then((res) => {
-        console.log(res);
-        _this.paperList = res.data.data.records;
-        _this.currentPage = res.data.data.current;
-        _this.total = res.data.data.total;
-        _this.pageSize = res.data.data.size;
-      });
-    },
+    // page(currentPage) {
+    //   const _this = this;
+    //   _this.$axios.get("/reviewer?currentPage=" + currentPage).then((res) => {
+    //     console.log(res);
+    //     _this.paperList = res.data.data.records;
+    //     _this.currentPage = res.data.data.current;
+    //     _this.total = res.data.data.total;
+    //     _this.pageSize = res.data.data.size;
+    //   });
+    // },
     update() {
       // console.log(this.checkList)
       // console.log(this.checkList.includes('timeOrder'))
       // console.log('=====')
 
       let params = {
-        rev_id:this.rev_id,
+        rev_id: this.user.rev_id,
         currentPage: this.currentPage,
         numEachPage: this.pageSize,
         skeywords: this.skeywords,
@@ -147,24 +126,38 @@ export default {
       };
       const _this = this;
       _this.$axios.get("/reviewer", params).then((res) => {
-
+        console.log(res.data.data.records);
+        _this.paperList = res.data.data.records;
+        _this.currentPage = res.data.data.current;
+        _this.total = res.data.data.total;
+        _this.pageSize = res.data.data.size;
       });
     },
+    handleReview(row) {
+        console.log(row);
+      },
+      handleApprove(row) {
+        console.log(row);
+      }
   },
 
   created() {
-    this.page(1);
-    if (this.$store.getters.getUser.uname) {//需要初始化rev_id（从userinfo读取）
-      this.user.username = this.$store.getters.getUser.uname;
+    // this.page(1);
+    // if (this.$store.getters.getUser.uname) {
+    //   this.user.username = this.$store.getters.getUser.uname;
 
-      console.log("123123123");
-      console.log(this.$store.getters.getUser.uname);
-      console.log("123123123");
+    //   console.log("123123123");
+    //   console.log(this.$store.getters.getUser.uname);
+    //   console.log("123123123");
 
-      this.hasLogin = true; //此变量不需要全局。
-    } else {
-      console.log("没登上");
+    //   this.hasLogin = true; //此变量不需要全局。
+    // } else {
+    //   console.log("没登上");
+    // }
+    if (this.$store.getters.getUser.rev_id) {
+      this.user.rev_id = this.$store.getters.getUser.rev_id;
     }
+    this.update();
   },
 };
 </script>
@@ -187,7 +180,7 @@ export default {
 .el-aside {
   background-color: #d3dce6;
   color: #333;
-  text-align: center;
+  /* text-align: center; */
   /* line-height: 300px; */
 }
 
@@ -195,7 +188,7 @@ export default {
   /* background-color: #989ea3; */
   color: #333;
   text-align: center;
-  line-height: 160px;
+  /* line-height: 160px; */
 }
 
 body > .el-container {
@@ -216,8 +209,7 @@ body > .el-container {
   margin: 0 auto;
 }
 
-el-checkbox {
-  margin-top: 100px;
-  margin-bottom: 100px;
+.checkbox {
+  margin: 15px 20px;
 }
 </style>

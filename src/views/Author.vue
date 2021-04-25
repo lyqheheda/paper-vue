@@ -19,10 +19,8 @@
         </div>
 
         <el-checkbox-group v-model="checkList" class="checkbox" >
-          <el-checkbox label="showPassed" @change="update" style="margin-left: 10px">
-            show reviewed
-          </el-checkbox>
-          <hr style="margin: 5px 0px;color: #E9EEF3">
+
+          
           <el-checkbox label="timeOrder" @change="update" style="margin-left: 10px">
             order by time
           </el-checkbox>
@@ -46,8 +44,8 @@
                 <el-button
                     @click="handleReview(scope.row)"
                     type="text"
-                    size="small"
-                >CORRECT</el-button>
+                    size="big"
+                >edit</el-button>
 
               </template>
             </el-table-column>
@@ -78,11 +76,18 @@ export default {
   components: { Header },
   data() {
     return {
-      checkList: ["showPassed"],
+      checkList: [],
       skeywords: "",
       user: {
         username: "",
-        rev_id: 0,
+        aut_id: 0,
+      },
+      author:{  //author类
+        lastname:'',
+        firstname:'',
+        authorInstitute:'',
+        image:'',
+        rtype:'',
       },
       hasLogin: false, //这个咋用？
       currentPage: 1,
@@ -117,28 +122,30 @@ export default {
       // console.log('=====')
 
       let params = {
-        rev_id: this.user.rev_id,
+        aut_id: this.user.aut_id,
         currentPage: this.currentPage,
         numEachPage: this.pageSize,
         skeywords: this.skeywords,
         timeOrder: this.checkList.includes("timeOrder"),
-        showPassed: this.checkList.includes("showPassed"),
       };
       const _this = this;
-      _this.$axios.get("/reviewer", params).then((res) => {
-        console.log(res.data.data.records);
+      _this.$axios.get("/author", params).then((res) => {
+        console.log('========')
+        console.log(res.data.data);
+        console.log('========')
         _this.paperList = res.data.data.records;
         _this.currentPage = res.data.data.current;
         _this.total = res.data.data.total;
         _this.pageSize = res.data.data.size;
+        _this.author=res.data.data.Author;// 此处接是否接收到了？需要确认一下
       });
     },
     handleReview(row) {
         // console.log(row);
-        // console.log(this.user.rev_id)
+        // console.log(this.user.aut_id)
 
         this.$router.push({name:'AuthorCorrect',
-        query:{rev_id: this.user.rev_id, pap_id:row.pap_id}});
+        query:{aut_id: this.user.aut_id, pap_id:row.pap_id}});
       },
   },
 
@@ -155,8 +162,8 @@ export default {
     // } else {
     //   console.log("没登上");
     // }
-    if (this.$store.getters.getUser.rev_id) {
-      this.user.rev_id = this.$store.getters.getUser.rev_id;
+    if (this.$store.getters.getUser.aut_id) {
+      this.user.aut_id = this.$store.getters.getUser.aut_id;
     }
     this.update();
   },

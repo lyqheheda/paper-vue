@@ -85,6 +85,11 @@ const routes = [
     name: 'AuthorCorrect',
     component: AuthorCorrect,
   },
+  {
+    path: '/author/paperAdd',
+    name: 'AddPaper',
+    component: AuthorCorrect,
+  },
 
 ]
 

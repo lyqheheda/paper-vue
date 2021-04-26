@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
       <div>
         <img alt="Website Logo" class="mylogo" src="../assets/myLogo.gif">
@@ -12,8 +12,8 @@
     <template slot="title" v-bind:disabled="isAuther">发表管理</template>
     <el-menu-item index="2-1"><router-link :to="{name:'AddPaper', query:{aut_id:user.aut_id}}"> add paper</router-link></el-menu-item>
     <el-menu-item index="2-2"><a class="Page_title" href="/author" >manage paper</a></el-menu-item>
-    
-    
+
+
   </el-submenu>
       <el-menu-item index="3">
         <a class="Page_title" href="/reviewer" v-bind:disabled="isRevier">审阅管理</a></el-menu-item>
@@ -124,7 +124,7 @@ export default {
   float: left;
   margin-left: 5px;
   /*margin-top: 10px;*/
-  margin-right: 430px;
+  margin-right: 400px;
 }
 
 .Page_title {
@@ -134,7 +134,7 @@ export default {
 a {
   text-decoration: none;
 }
- 
+
 .router-link-active {
   text-decoration: none;
 }

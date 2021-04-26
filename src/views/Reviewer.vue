@@ -47,7 +47,7 @@
                   @click="handleReview(scope.row)"
                   type="text"
                   size="small"
-                  >review</el-button>
+                  >review<i class="el-icon-view el-icon--right"></i></el-button>
 
               </template>
             </el-table-column>

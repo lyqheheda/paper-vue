@@ -61,11 +61,11 @@
           <!-- <el-button type="primary" @click="onPreveiw()"
             >{{ online_preview_msg }}<i class="el-icon-view"></i
           ></el-button> -->
-          <el-button type="success" @click=""
+          <el-button type="success" @click="submitForm('paperDetail')"
             >Submit&nbsp;<i class="el-icon-star-off"></i
           ></el-button>
-          <el-button type="danger" @click=""
-            >Delete&nbsp;<i class="el-icon-star-off"></i
+          <el-button type="danger" @click="resetForm('paperDetail')"
+            >Reset&nbsp;<i class="el-icon-star-off"></i
           ></el-button>
         </el-footer>
       </el-container>
@@ -215,8 +215,29 @@ export default {
         }],
         category: '选项1',
       file_url:'',
-      autid_two:-1,
-      autid_three:-1,
+      autid_two:undefined,
+      autid_three:undefined,
+        },
+         rules: {
+          pname: [
+            { required: true, message: 'Please select', trigger: 'blur' },
+          ],
+          pabstract:[
+            { required: true, message: 'Please enter', trigger: 'blur' },
+          ],
+           keyword: [
+           { required: true, message: 'Please enter', trigger: 'blur' },
+          ],
+          category: [
+            { required: true, message: 'Please enter', trigger: 'blur' },
+          ],
+          autid_two:[
+            { required: true, message: 'Please enter', trigger: 'blur' },
+          ],
+          autid_three:[
+            { required: true, message: 'Please enter', trigger: 'blur' },
+          ],
+          
         },
       
       authorList: [
@@ -269,23 +290,70 @@ export default {
         this.online_preview === true ? "Preview ON " : "Preview OFF ";
       this.online_preview = !this.online_preview;
     },
+    submitForm(formName) {
+      console.log('=====')
+      console.log(this.paperDetail)
+      const form={
+        aut_id:this.aut_id,
+        paperDetail:this.paperDetail
+      }
+      console.log(form)
+      console.log('=====')
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+
+          const _this = this
+          this.$axios.post('/author/paperAdd', form).then(res => {//这个接口对吗
+
+            console.log(res.data.code)
+            //试一下 这个行不？
+            _this.$router.push("/author")
+        
+          })
+
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+    resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
   },
   created() {
-    const aut_id = this.$route.query.aut_id;
-    console.log(aut_id);
-    const _this = this;
+     this.aut_id = this.$store.getters.getUser.aut_id
+    const pap_id=this.$route.query.pap_id;
+    console.log(aut_id,pap_id);
+        // 编辑现有的论文
+      if(pap_id){
+  const _this = this;
     this.$axios
-      .post("/author/paperAdd", { pap_id: pap_id, rev_id: rev_id })
+      .get("/papers", { paperId: pap_id })
       .then(
         (res) => {
           console.log("=====");
           console.log(res);
           console.log("=====");
+          
+          this.paperDetail.pname=res.data.data.paperDetail.pname
+          this.paperDetail.pabstract=res.data.data.paperDetail.pabstract
+          this.paperDetail.keyword=res.data.data.paperDetail.keyword
+          this.paperDetail.category=res.data.data.paperDetail.category
+          // this.paperDetail.file_url=res.data.data.
+          this.authorList=res.data.data.authorList
+          
+
+
+
         },
         (res) => {
-          console.log("post失败");
+          console.log("get失败");
         }
       );
+      }
+    
+    
   },
 };
 </script>

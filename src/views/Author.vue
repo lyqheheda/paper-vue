@@ -144,7 +144,7 @@ export default {
         // console.log(row);
         // console.log(this.user.aut_id)
 
-        this.$router.push({name:'AuthorCorrect',
+        this.$router.push({name:'AuthorEdit',
         query:{aut_id: this.user.aut_id, pap_id:row.pap_id}});
       },
   },

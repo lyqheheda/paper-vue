@@ -9,7 +9,7 @@ import Reviewer from '../views/Reviewer.vue'
 import Test from '../views/Test.vue'
 import PaperReview from '../views/PaperReview.vue'
 import Author from "../views/Author.vue";
-import AuthorCorrect from "../views/AuthorCorrect.vue";
+import AuthorEdit from "../views/AuthorEdit.vue";
 
 Vue.use(VueRouter)
 
@@ -82,13 +82,13 @@ const routes = [
   },
   {
     path: '/author/paperEdit',
-    name: 'AuthorCorrect',
-    component: AuthorCorrect,
+    name: 'AuthorEdit',
+    component: AuthorEdit,
   },
   {
     path: '/author/paperAdd',
     name: 'AddPaper',
-    component: AuthorCorrect,
+    component: AuthorEdit,
   },
 
 ]

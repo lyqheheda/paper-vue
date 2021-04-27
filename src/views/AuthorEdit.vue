@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header></Header>
+    <Header :showLogin="true"></Header>
     <div>
       <el-container>
         <el-avatar

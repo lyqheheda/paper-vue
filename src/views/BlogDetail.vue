@@ -134,10 +134,10 @@
       },
     },
     created() {
-      const blogId = this.$route.params.blogId
-      console.log(blogId)
+      const paperId = this.$route.params.blogId
+      console.log(paperId)
       const _this = this
-      this.$axios.get('/blog/' + blogId).then(res => {
+      this.$axios.get('/paperDetail?paperId=' + paperId).then(res => {
         const blog = res.data.data
         _this.blog.id = blog.id
         _this.blog.title = blog.title

@@ -2,7 +2,7 @@
     <div>
       <el-container>
       <el-header>
-        <img class="mlogo" src="https://www.markerhub.com/dist/images/logo/markerhub-logo.png" alt="">
+        <img class="mlogo" src="../assets/myLogo.gif" alt="">
       </el-header>
       <el-main>
 <el-form :model="registerForm" :rules="rules" ref="registerForm" label-width="100px" class="demo-ruleForm">
@@ -45,10 +45,10 @@
     data() {
       return {
         registerForm: {
-          aut_id: '',
+          // aut_id: '',
           uname:'',
           password:'',
-          rname: '', //权限名称，A代表作者,B审稿人，C代表两者都是
+          rname: '', //权限名称，A代表作者,B审稿人
           firstname:'',
           lastname:'',
           

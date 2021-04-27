@@ -7,7 +7,7 @@
         <el-form-item prop='input'>
           <el-input v-model="ruleForm.input" class="input-with-select" placeholder="请输入内容">
             <el-select slot="prepend" v-model="ruleForm.select" placeholder="请选择" style='width:150px;'>
-              <el-option label="paper title" value="paper_title"></el-option>
+              <el-option label="paper title" value="pname"></el-option>
               <el-option label="author" value="author"></el-option>
               <el-option label="keyword" value="keyword"></el-option>
             </el-select>
@@ -19,15 +19,16 @@
     <div class="block">
       <el-timeline>
 
-        <el-timeline-item v-for="blog in blogs" :timestamp="blog.created" placement="top">
+        <el-timeline-item v-for="blog in blogs" :timestamp="blog.pcreateTime" placement="top">
           <el-card>
             <h4>
-              <router-link :to="{name: 'BlogDetail', params: {blogId: blog.paper_id}}">
+              <router-link :to="{name: 'BlogDetail', params: {blogId: blog.paperId}}">
                 {{ blog.pname }}
               </router-link>
             </h4>
-            <p>author: {{ blog.aname }}</p>
-            <p>keywords: {{ blog.keyword }}</p>
+            <p>author: {{ blog.autOne  +' '+blog.autTwo+' '+blog.autThree}}</p>
+            <p>keywords: {{ blog.keyWord }}</p>
+            <p>abstract:{{blog.pabstract}}</p>
           </el-card>
         </el-timeline-item>
 
@@ -57,7 +58,7 @@ export default {
     return {
       // blogs: {},
       blogs: [{
-        paper_id: 11,
+        paperId: 11,
         userId: 1,
         pname: "1111",
         paperAbstract: "111",
@@ -73,7 +74,7 @@ export default {
 
       ruleForm: {
         input: '',
-        select: 'paper_title'
+        select: 'pname'
       },
       rules: {
         input: [
@@ -90,8 +91,9 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           const _this = this
-          this.$axios.post('/search', this.ruleForm).then(res => {//这个接口对吗
-
+          
+          this.$axios.get('/papersSearch', {params:{input:this.ruleForm.input,select:this.ruleForm.select}}).then(res => {
+            
             console.log(res.data)
             //试一下 这个行不？
             _this.blogs = res.data.data.records
@@ -109,8 +111,11 @@ export default {
     },
     page(currentPage) {
       const _this = this
-      _this.$axios.get("/blogs?currentPage=" + currentPage).then(res => {
+      _this.$axios.get("/papers",{params:{currentPage:currentPage, numEachPage:_this.pageSize}}).then(res => {
+        console.log('=====Blogs.vue page()')
         console.log(res)
+        console.log('=====')
+
         _this.blogs = res.data.data.records
         _this.currentPage = res.data.data.current
         _this.total = res.data.data.total

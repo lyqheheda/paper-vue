@@ -17,7 +17,7 @@
   </el-submenu>
       <el-menu-item index="3">
         <a class="Page_title" href="/reviewer" v-bind:disabled="isRevier">审阅管理</a></el-menu-item>
-      <el-menu-item class="Page_title" index="4">校园管理</el-menu-item>
+      <!-- <el-menu-item class="Page_title" index="4">校园管理</el-menu-item> -->
       <el-menu-item v-if="!hasLogin" v-show='showLogin' index="5">
         <a class="Page_title" href="/login">登录</a>
         <!-- <a @click="testLogin">登录</a> -->

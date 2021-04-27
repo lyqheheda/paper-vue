@@ -29,6 +29,8 @@
         </el-checkbox-group>
       </el-aside>
       <el-main>
+         <h3> Review Management </h3>
+        <hr/>
         <div>
           <el-table :data="paperList" stripe style="margin:10px">
             <el-table-column prop="pname" label="paper title" width="300px">

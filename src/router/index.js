@@ -20,7 +20,7 @@ const routes = [
     redirect: {name: "Blogs"}
   },
   {
-    path: '/blogs',
+    path: '/papers',
     name: 'Blogs',
     component: Blogs
   },
@@ -38,7 +38,7 @@ const routes = [
     }
   },
   {
-    path: '/blog/:blogId',
+    path: '/paperDetail/:blogId',
     name: 'BlogDetail',
     component: BlogDetail
   },
@@ -64,11 +64,6 @@ const routes = [
     path: '/reviewer/paperReview',
     name: 'PaperReview',
     component: PaperReview
-  },
-  {
-    path: '/author',
-    name: 'Author',
-    component: Author
   },
   {
     path: '/test',

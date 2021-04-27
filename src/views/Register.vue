@@ -84,7 +84,7 @@
             const _this = this
             this.$axios.post('/register', this.registerForm).then(res => {
             
-            if(res.data.isRegistered){
+            if(res.data.code===100){//这里接受的对不对？
               _this.$router.push("/blogs")
 
             }

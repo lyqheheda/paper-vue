@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 
 
-axios.defaults.baseURL = "http://10.129.158.217:9000"
+// axios.defaults.baseURL = "http://10.129.158.217:9000"
 
 // 前置拦截，转换get请求的数组形式
 axios.interceptors.request.use(config => {

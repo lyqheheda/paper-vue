@@ -52,8 +52,8 @@ export default {
       let config = {
         headers: { "Content-Type": "multipart/form-data" }
       };
-
-      axios.post("http://192.168.31.253:8080/upload", param, config);
+      console.log(param)
+      this.$axios.post("author/paperAdd", param, config);
     }
   }
 };

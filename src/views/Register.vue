@@ -15,9 +15,9 @@
       <el-option label="reviewer" value="B"></el-option>
     </el-select>
   </el-form-item>
-  <el-form-item label="Author id"  prop="aut_id" v-if="registerForm.rname==='A'">
+  <!-- <el-form-item label="Author id"  prop="aut_id" v-if="registerForm.rname==='A'">
     <el-input v-model="registerForm.aut_id"></el-input>
-  </el-form-item>
+  </el-form-item> -->
   <el-form-item label="user name" prop="uname">
     <el-input v-model="registerForm.uname"></el-input>
   </el-form-item>

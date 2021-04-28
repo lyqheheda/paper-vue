@@ -43,19 +43,21 @@
         <el-form-item label="#third author" prop="autid_three">
           <el-input v-model="paperDetail.autid_three"></el-input>
         </el-form-item>
-        
-        
-
-        <p>
-            上传pdf文件\url
-        </p>
-          
-          
-          
-          
-          
-          
         </el-form>
+<el-upload
+  class="upload-demo"
+  action="http://10.129.158.217:9000/author/paperAdd"
+  :on-preview="handlePreview"
+  :on-remove="handleRemove"
+  :before-remove="beforeRemove"
+  multiple
+  :limit="3"
+  :on-exceed="handleExceed"
+  :file-list="fileList">
+  <el-button size="small" type="primary">Upload paper</el-button>
+  <div slot="tip" class="el-upload__tip">Choose a pdf file</div>
+</el-upload>
+
            </el-main>
         <el-footer>
           <!-- <el-button type="primary" @click="onPreveiw()"
@@ -217,6 +219,7 @@ export default {
       file_url:'',
       autid_two:undefined,
       autid_three:undefined,
+      fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
         },
          rules: {
           pname: [
@@ -319,6 +322,18 @@ export default {
     },
     resetForm(formName) {
         this.$refs[formName].resetFields();
+      },
+       handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      },
+      handleExceed(files, fileList) {
+        this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+      },
+      beforeRemove(file, fileList) {
+        return this.$confirm(`确定移除 ${ file.name }？`);
       }
   },
   created() {

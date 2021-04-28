@@ -4,12 +4,12 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
+  state: {// store login informatoin
     token: '',
     userInfo: JSON.parse(sessionStorage.getItem("userInfo"))
   },
   mutations: {
-    // set
+    // set 
     SET_TOKEN: (state, token) => {
       state.token = token
       localStorage.setItem("token", token) //浏览器关闭了也可以存在本地

@@ -14,9 +14,9 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => {
     let res = response.data;
 
-    console.log("=================axios.js")
-    console.log(res)
-    console.log("=================")
+    // console.log("=================axios.js")
+    // console.log(res)
+    // console.log("=================")
 
     if (res.code === 200) {
       return response

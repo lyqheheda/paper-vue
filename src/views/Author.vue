@@ -91,7 +91,7 @@ export default {
         image:'',
         rtype:'',
       },
-      hasLogin: false, //这个咋用？
+      hasLogin: false, //hasn't used yet. this is used to classify user priviledge
       currentPage: 1,
       total: 0,
       pageSize: 5,
@@ -118,12 +118,12 @@ export default {
     //     _this.pageSize = res.data.data.size;
     //   });
     // },
-    update() {
+    update() {  //called when checkbox is checked
       // console.log(this.checkList)
       // console.log(this.checkList.includes('timeOrder'))
       // console.log('=====')
 
-      let params = {
+      let params = {  //the form to be sent
         aut_id: this.user.aut_id,
         currentPage: this.currentPage,
         numEachPage: this.pageSize,
@@ -131,7 +131,7 @@ export default {
         timeOrder: this.checkList.includes("timeOrder"),
       };
       const _this = this;
-      _this.$axios.get("/author", params).then((res) => {
+      _this.$axios.get("/author", params).then((res) => {// send form and get the paper list
         console.log('========')
         console.log(res.data.data);
         console.log('========')
@@ -142,7 +142,7 @@ export default {
         _this.author=res.data.data.Author;// 此处接是否接收到了？需要确认一下
       });
     },
-    handleReview(row) {
+    handleReview(row) {// get the unique aut_id and paper id of each item and route to detail page
         // console.log(row);
         // console.log(this.user.aut_id)
 
@@ -164,8 +164,8 @@ export default {
     // } else {
     //   console.log("没登上");
     // }
-    if (this.$store.getters.getUser.aut_id) {
-      this.user.aut_id = this.$store.getters.getUser.aut_id;
+    if (this.$store.getters.getUser.aut_id) {    // get author id and store it
+      this.user.aut_id = this.$store.getters.getUser.aut_id;    
     }
     this.update();
   },

@@ -194,12 +194,12 @@ export default {
 
   data() {
     return {
-      aut_id:-1,
+      aut_id:-1,  //default: -1
     paperDetail: {
       pname:'',
       pabstract:'',
       keyword:'',
-      options:[{//这里得有个接口把数据传过来
+      options:[{//
           value: '选项1',
           label: '黄金糕'
         }, {

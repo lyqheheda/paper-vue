@@ -35,8 +35,8 @@
     data() {
       return {
         ruleForm: {
-          username: 'team8-1',
-          password: '1'
+          username: 'user10001',
+          password: 'user10001'
         },
         rules: {
           username: [
@@ -69,7 +69,7 @@
               // 获取
               console.log(_this.$store.getters.getUser)
 
-              _this.$router.push("/blogs")
+              _this.$router.push("/papers")
             })
 
           } else {

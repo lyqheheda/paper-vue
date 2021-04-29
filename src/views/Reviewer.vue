@@ -7,7 +7,7 @@
         <div style="margin-top: 15px" class="searchbox">
           <el-input
             placeholder="关键词"
-            v-model="skeywords"
+            v-model="keywords"
             class="input-with-select"
           >
             <el-button
@@ -33,13 +33,15 @@
         <hr/>
         <div>
           <el-table :data="paperList" stripe style="margin:10px">
-            <el-table-column prop="pname" label="paper title" width="300px">
+            <el-table-column prop="pname" label="paper title" width="200px">
             </el-table-column>
-            <el-table-column prop="authorName" label="author" width="230px">
+            <el-table-column prop="authorName" label="author" width="150px">
             </el-table-column>
-            <el-table-column prop="category" label="category" width="220px">
+            <el-table-column prop="keyword" label="keyword" width="200px">
+            </el-table-column>
+            <el-table-column prop="category" label="category" width="150px">
           </el-table-column>
-            <el-table-column prop="publicID" label="state" width="100px">
+            <el-table-column prop="publicId" label="state" width="100px">
             </el-table-column>
             <!-- <el-table-column prop="operation" label="operation">
             </el-table-column> -->
@@ -81,11 +83,8 @@ export default {
   data() {
     return {
       checkList: ["showPassed"],
-      skeywords: "",
-      user: {
-        username: "",
+      keywords: "",
         rev_id: 0,
-      },
       hasLogin: false, //这个咋用？
       currentPage: 1,
       total: 0,
@@ -118,18 +117,29 @@ export default {
       // console.log(this.checkList.includes('timeOrder'))
       // console.log('=====')
 
-      let params = {
-        rev_id: this.user.rev_id,
+      // let params = {
+      //   rev_id: this.user.rev_id,
+      //   currentPage: this.currentPage,
+      //   numEachPage: this.pageSize,
+      //   keywords: this.keywords,
+      //   timeOrder: this.checkList.includes("timeOrder"),
+      //   showPassed: this.checkList.includes("showPassed"),
+      // };
+      const _this = this;
+      _this.$axios.get("/reviewer", {params:{
+        rev_id: this.rev_id,
         currentPage: this.currentPage,
         numEachPage: this.pageSize,
-        skeywords: this.skeywords,
+        keywords: this.keywords,
         timeOrder: this.checkList.includes("timeOrder"),
         showPassed: this.checkList.includes("showPassed"),
-      };
-      const _this = this;
-      _this.$axios.get("/reviewer", params).then((res) => {
-        console.log(res.data.data.records);
+      }}).then((res) => {
+        console.log('res.data')
+        console.log(res.data)
+
         _this.paperList = res.data.data.records;
+        console.log('paperlist:')
+        console.log(_this.paperList)
         _this.currentPage = res.data.data.current;
         _this.total = res.data.data.total;
         _this.pageSize = res.data.data.size;
@@ -140,7 +150,7 @@ export default {
         // console.log(this.user.rev_id)
 
         this.$router.push({name:'PaperReview',
-        query:{rev_id: this.user.rev_id, pap_id:row.pap_id}});
+        query:{rev_id: this.rev_id, pap_id:row.pap_id}});
       },
   },
 
@@ -158,7 +168,7 @@ export default {
     //   console.log("没登上");
     // }
     if (this.$store.getters.getUser.rev_id) {
-      this.user.rev_id = this.$store.getters.getUser.rev_id;
+      this.rev_id = this.$store.getters.getUser.rev_id;
     }
     this.update();
   },

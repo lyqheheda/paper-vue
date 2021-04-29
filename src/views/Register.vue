@@ -155,6 +155,7 @@
             res=>{
               console.log('失败')
               console.log(res)
+              _this.$router.push("/")
             })
           } else {
             console.log('error submit!!');

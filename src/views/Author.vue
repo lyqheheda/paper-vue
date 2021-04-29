@@ -8,7 +8,7 @@
         <div style="margin-top: 15px" class="searchbox">
           <el-input
               placeholder="关键词"
-              v-model="skeywords"
+              v-model="keywords"
               class="input-with-select"
           >
             <el-button
@@ -82,7 +82,7 @@ export default {
   data() {
     return {
       checkList: [],
-      skeywords: "",
+      keywords: "",
         aut_id: undefined,
       author:{  //author类
         lastname:'',
@@ -138,7 +138,7 @@ export default {
         aut_id: this.aut_id,
         currentPage: this.currentPage,
         numEachPage: this.pageSize,
-        skeywords: this.skeywords,
+        keywords: this.keywords,
         timeOrder: this.checkList.includes("timeOrder"),
       }}).then((res) => {// send form and get the paper list
         // console.log('========')
@@ -146,7 +146,7 @@ export default {
         // console.log('========')
         _this.paperList = res.data.data.ipage.records;
         console.log('paperlist:')
-console.log(_this.paperList)
+        console.log(_this.paperList)
         _this.currentPage = res.data.data.ipage.current;
         _this.total = res.data.data.ipage.total;
         _this.pageSize = res.data.data.ipage.size;

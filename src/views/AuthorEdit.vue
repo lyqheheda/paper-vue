@@ -3,13 +3,13 @@
     <Header :showLogin="true"></Header>
     <div>
       <el-container>
-        <el-avatar
+        <!-- <el-avatar
           :size="50"
           :src="squareUrl"
           style="margin: 10px 20px 10px 10px"
-        ></el-avatar>
+        ></el-avatar> -->
         <h2 style="font-family: 'Times New Roman'">
-          WELCOME {{ authorList[0].firstname }} {{ authorList[0].lastname }}
+          WELCOME {{ authorList[0].aname }} 
         </h2>
       </el-container>
       <el-container>
@@ -18,7 +18,6 @@
         <el-form-item label="title" prop="pname">
           <el-input v-model="paperDetail.pname"></el-input>
         </el-form-item>
-
         <el-form-item label="abstract" prop="pabstract">
           <el-input type="textarea" v-model="paperDetail.pabstract"></el-input>
         </el-form-item>
@@ -28,7 +27,7 @@
         </el-form-item> 
           
           <el-form-item label='category' prop='category'>
-            <el-select v-model="paperDetail.category" filterable placeholder="请选择" style='margin-left: -830px;'>
+            <el-select v-model="paperDetail.category" filterable placeholder="select" style='margin-left: -830px;'>
     <el-option
       v-for="item in paperDetail.options"
       :key="item.value"
@@ -194,29 +193,22 @@ export default {
 
   data() {
     return {
-      aut_id:-1,  //default: -1
+      aut_id:undefined,  //default: -1
     paperDetail: {
       pname:'',
       pabstract:'',
       keyword:'',
       options:[{//
-          value: '选项1',
-          label: '黄金糕'
+          value: 'A',
+          label: 'data mining'
         }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-        category: '选项1',
+          value: 'B',
+          label: 'computer graphics'
+        },
+        ],
+        category: '',
       file_url:'',
+      
       autid_two:undefined,
       autid_three:undefined,
       fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
@@ -235,10 +227,10 @@ export default {
             { required: true, message: 'Please enter', trigger: 'blur' },
           ],
           autid_two:[
-            { required: true, message: 'Please enter', trigger: 'blur' },
+            { required: false, message: 'Please enter', trigger: 'blur' },
           ],
           autid_three:[
-            { required: true, message: 'Please enter', trigger: 'blur' },
+            { required: false, message: 'Please enter', trigger: 'blur' },
           ],
           
         },
@@ -338,27 +330,30 @@ export default {
   },
   created() {
      this.aut_id = this.$store.getters.getUser.aut_id
+     
     const pap_id=this.$route.query.pap_id;
-    console.log(aut_id,pap_id);
         // 编辑现有的论文
       if(pap_id){
   const _this = this;
     this.$axios
-      .get("/papers", { paperId: pap_id })
+      .get("/paperDetail", {params:{ paperId: pap_id }})
       .then(
         (res) => {
           console.log("=====");
-          console.log(res);
+          console.log(res.data.data);
           console.log("=====");
           
-          this.paperDetail.pname=res.data.data.paperDetail.pname
-          this.paperDetail.pabstract=res.data.data.paperDetail.pabstract
-          this.paperDetail.keyword=res.data.data.paperDetail.keyword
-          this.paperDetail.category=res.data.data.paperDetail.category
-          // this.paperDetail.file_url=res.data.data.
-          this.authorList=res.data.data.authorList
-          
+          _this.paperDetail.pname=res.data.data.paperDetail.pname
+          _this.paperDetail.pabstract=res.data.data.paperDetail.pabstract
+          _this.paperDetail.keyword=res.data.data.paperDetail.keyword
+          _this.paperDetail.category=res.data.data.paperDetail.category
+          console.log('_this.authorList')         
+          // _this.paperDetail.autid_two=res.data.data.authorDetails[1].autId
+          // _this.paperDetail.autid_three=res.data.data.authorDetails[2].autId
+          // _this.authorList=res.data.data.authorDetails
 
+          console.log(_this.authorList)         
+// _this.paperDetail.file_url=res.data.data.
 
 
         },
@@ -367,6 +362,7 @@ export default {
         }
       );
       }
+      
     
     
   },

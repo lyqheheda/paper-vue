@@ -62,12 +62,12 @@
 
           </el-main>
         </el-container>
-        <el-footer>
+        <!-- <el-footer>
           <el-button type="primary" @click="onPreveiw()">{{online_preview_msg}}<i class="el-icon-view"></i></el-button>
           <el-button type="primary" @click="">点击收藏<i class="el-icon-star-off" ></i></el-button>
           <el-button type="primary" @click="">文档下载<i class="el-icon-download"></i></el-button>
           <el-button type="primary" @click="">联系作者<i class="el-icon-phone-outline"></i></el-button>
-        </el-footer>
+        </el-footer> -->
       </el-container>
     </div>
 

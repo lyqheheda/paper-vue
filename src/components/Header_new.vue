@@ -5,23 +5,21 @@
       <div>
         <img alt="Website Logo" class="mylogo" src="../assets/myLogo.gif">
       </div>
-      <el-menu-item v-if='hasLogin' >
-         Welcome, {{user.username}}
-      </el-menu-item>
+      
       <el-menu-item index="1">
-        <router-link :to="{name: 'Blogs'}" class="Page_title">论文首页</router-link>
+        <router-link :to="{name: 'Blogs'}" class="Page_title">Homepage</router-link>
       </el-menu-item>
       <el-submenu index="2" v-show='user.rtype==="A"'>
-    <template slot="title" >发表管理</template>
+    <template slot="title" >Publish Management</template>
     <el-menu-item index="2-1"><router-link :to="{name:'AddPaper', query:{aut_id:user.aut_id}}"> add paper</router-link></el-menu-item>
     <el-menu-item index="2-2"><a class="Page_title" href="/author" >manage paper</a></el-menu-item>
 
 
   </el-submenu>
       <el-menu-item index="3" v-show='user.rtype==="B"'>
-        <a class="Page_title" href="/reviewer" >审阅管理</a></el-menu-item>
+        <a class="Page_title" href="/reviewer" >Review Management</a></el-menu-item>
       <el-menu-item v-if="!hasLogin" v-show='showLogin' index="5">
-        <a class="Page_title" href="/login">登录</a>
+        <a class="Page_title" href="/login">Login</a>
         <!-- <a @click="testLogin">登录</a> -->
       </el-menu-item>
       
@@ -31,11 +29,14 @@
           <el-avatar :size="40" :src="user.avatar"></el-avatar>
         
        </template>
-        <el-menu-item index="5-5" @click="logout">退出登录</el-menu-item>
+        <el-menu-item index="5-5" @click="logout">Logout</el-menu-item>
 
       </el-submenu>
       <el-menu-item v-if="!hasLogin" index="6">
-        <a class="Page_title" href="/register">注册</a>
+        <a class="Page_title" href="/register">Register</a>
+      </el-menu-item>
+      <el-menu-item v-if='hasLogin' >
+         Welcome, {{user.username}}
       </el-menu-item>
     </el-menu>
     <div class="line"></div>

@@ -16,7 +16,7 @@
             <p>{{paperDetail.iname}}</p>
             <p class="mainText" style="line-height: 24px; font-family: 'Times New Roman'">{{ paperDetail.pabstract }}</p>
 
-            <p class="mainText"><strong>Abstract:&nbsp;{{ paperDetail.keyword }}</strong></p>
+            <p class="mainText"><strong>keyword:&nbsp;{{ paperDetail.keyword }}</strong></p>
             <p class="mainText">Category:&nbsp;{{ paperDetail.category }}</p>
             <p class="mainText">Public ID:&nbsp;{{ paperDetail.publicID }}</p>
             <hr style="color: gainsboro;border:1px dashed #000">
@@ -24,7 +24,7 @@
         </el-container>
 
           <!--            author introduction-->
-        <div class="authorShow" style="width: 900px;margin: auto">
+        <!-- <div class="authorShow" style="width: 900px;margin: auto">
           <el-carousel :interval="4000" type="card" height="300px" width="900px">
             <el-carousel-item v-for="item in 3" :key="item">
               <div style="margin: auto;text-align:center;padding: 10px;border: solid;border-color: gainsboro;">
@@ -38,9 +38,9 @@
             </el-carousel-item>
           </el-carousel>
 
-        </div>
+        </div> -->
         <div>
-          <hr style="color: gainsboro;border:1px dashed #000">
+          <!-- <hr style="color: gainsboro;border:1px dashed #000"> -->
         </div>
 
         <!--          add comments-->
@@ -60,8 +60,8 @@
         <el-footer style="margin-bottom: 50px;text-align: right">
 
           <el-button type="primary" @click=" ">Download PDF<i class="el-icon-download"></i></el-button>
-          <el-button type="success" @click="">PASS</el-button>
-          <el-button type="danger" @click="">REJECT</el-button>
+          <el-button type="success" @click="pass">PASS</el-button>
+          <el-button type="danger" @click="reject">REJECT</el-button>
         </el-footer>
       </el-container>
     </div>
@@ -78,6 +78,8 @@ export default {
   components: {Header},
   data() {
     return {
+      rev_id:undefined,
+      pap_id:undefined,
       authorList:[{
         aname:"Lin Yunqi",
         uname:"Beijing Jiaotong University",
@@ -109,6 +111,46 @@ export default {
     }
   },
   methods: {
+    pass(){
+      const isPass=true
+      const form={
+        rev_id: this.rev_id,
+        pap_id: this.pap_id,
+        common: this.common,
+        isPass: isPass
+      }
+      console.log(form)
+      console.log('=====')
+          const _this = this
+          this.$axios.post('reviewer/paperReview', form).then(res => {//这个接口对吗
+
+            console.log(res.data.code)
+            //试一下 这个行不？
+            _this.$router.push("reviewer")
+        
+          })
+   
+    },
+    reject(){
+      const isPass=false
+      const form={
+        rev_id: this.rev_id,
+        pap_id: this.pap_id,
+        common: this.common,
+        isPass: isPass
+      }
+      console.log(form)
+      console.log('=====')
+          const _this = this
+          this.$axios.post('reviewer/paperReview', form).then(res => {//这个接口对吗
+
+            console.log(res.data.code)
+            //试一下 这个行不？
+            _this.$router.push("reviewer")
+        
+          })
+   
+    },
     closeAside() {
       this.asidePrompt = this.hasAside === true? ">>":"<<";
       this.hasAside = !this.hasAside;
@@ -119,20 +161,41 @@ export default {
     },
   },
   created(){
-    const pap_id = this.$route.query.pap_id //注意这里和原来的代码区别: 用的是query 而不是params
-    const rev_id = this.$route.query.rev_id
-    console.log(pap_id,rev_id)
-    const _this = this
-    this.$axios.get("/reviewer/paperReview", {pap_id:pap_id,rev_id:rev_id}).then((res) => {
-          console.log("=====")
-          console.log(res)
-          console.log("=====")
-          _this.authorList=res.data.data.authorList
-          _this.paperDetail=res.data.data.paperDetail
+     this.pap_id = this.$route.query.pap_id //注意这里和原来的代码区别: 用的是query 而不是params
+     this.rev_id = this.$route.query.rev_id
+     console.log(this.pap_id,this.rev_id)
+     const _this = this;
+    this.$axios
+      .get("/paperDetail", {params:{ paperId: _this.pap_id }})
+      .then(
+        (res) => {
+          console.log("=====");
+          console.log(res.data.data);
+          console.log("=====");
+          
+          _this.paperDetail.pname=res.data.data.paperDetail.pname
+          _this.paperDetail.iname=res.data.data.paperDetail.iname
+          _this.paperDetail.email=res.data.data.paperDetail.email
+
+          _this.paperDetail.pabstract=res.data.data.paperDetail.pabstract
+          _this.paperDetail.keyword=res.data.data.paperDetail.keyword
+          _this.paperDetail.category=res.data.data.paperDetail.category
+          console.log('_this.authorList')   
+          // _this.authorList=res.data.data.authorDetails
+
+          // _this.paperDetail.autid_two=res.data.data.authorDetails[1].autId
+          // _this.paperDetail.autid_three=res.data.data.authorDetails[2].autId
+          // _this.authorList=res.data.data.authorDetails
+
+          console.log(_this.authorList)         
+// _this.paperDetail.file_url=res.data.data.
+
+
         },
-        (res)=>{
-          console.log("get失败")
-        });
+        (res) => {
+          console.log("get失败");
+        }
+      );
   }
 }
 </script>
@@ -153,24 +216,24 @@ export default {
   line-height: 60px;
 }
 
-
+/* 
 .el-aside {
   height: 700px;
   background-color: #D3DCE6;
   color: #333;
   text-align: center;
-  /*line-height: 200px;*/
-}
+  line-height: 200px;
+} */
 
 .el-main {
-  height: 700px;
+  /* height: 700px; */
   background-color: white;
   color: #333;
   text-align: center;
   /*line-height: 160px;*/
 }
 
-.transition-box {
+/* .transition-box {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   min-height: 700px;
   border-radius: 4px;
@@ -179,18 +242,18 @@ export default {
   color: #fff;
   padding: 40px 20px;
   box-sizing: border-box;
-}
+} */
 .mainText {
   text-align: left;
 }
-
+/* 
 .el-carousel__item h3 {
   color: #475669;
   font-size: 14px;
   opacity: 0.75;
   line-height: 200px;
   margin: 0;
-}
+} */
 
 .el-carousel__item:nth-child(n) {
   background-color: #ffffff;

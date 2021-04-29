@@ -150,7 +150,7 @@ export default {
         // console.log(this.user.rev_id)
 
         this.$router.push({name:'PaperReview',
-        query:{rev_id: this.rev_id, pap_id:row.pap_id}});
+        query:{rev_id: this.rev_id, pap_id:row.papId}});
       },
   },
 

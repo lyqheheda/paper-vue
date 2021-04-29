@@ -45,14 +45,14 @@
         </el-form>
 <el-upload
   class="upload-demo"
-  action="http://10.129.158.217:9000/author/paperAdd"
+  action="/author/paperAdd"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :before-remove="beforeRemove"
   multiple
   :limit="3"
   :on-exceed="handleExceed"
-  :file-list="fileList">
+  :file-list="paperDetail.fileList">
   <el-button size="small" type="primary">Upload paper</el-button>
   <div slot="tip" class="el-upload__tip">Choose a pdf file</div>
 </el-upload>
@@ -211,7 +211,8 @@ export default {
       
       autid_two:undefined,
       autid_three:undefined,
-      fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+      fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, 
+      {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
         },
          rules: {
           pname: [
@@ -329,7 +330,9 @@ export default {
       }
   },
   created() {
-     this.aut_id = this.$store.getters.getUser.aut_id
+    
+    
+    this.aut_id = this.$store.getters.getUser.aut_id
      
     const pap_id=this.$route.query.pap_id;
         // 编辑现有的论文

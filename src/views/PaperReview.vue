@@ -59,7 +59,11 @@
 <!--        reviewer action-->
         <el-footer style="margin-bottom: 50px;text-align: right">
 
-          <el-button type="primary" @click=" ">Download PDF<i class="el-icon-download"></i></el-button>
+          <el-button type="primary" @click="">
+            <a v-bind:href="paperDetail.download" download="paper.pdf" style="text-decoration: none" >
+              Download PDF
+            </a>
+            <i class="el-icon-download"></i></el-button>
           <el-button type="success" @click="">PASS</el-button>
           <el-button type="danger" @click="">REJECT</el-button>
         </el-footer>
@@ -102,7 +106,7 @@ export default {
         category:"航空航天科学与工程; 计算机软件及计算机应用",
         publicID:"10.27522/d.cnki.gkcgs.2021.000004",
         // download URL !!!!!!!!!attention !!!!!!!!!!!!
-        download:"G:\\intellJ_idea\\advanced_programming\\paper-vue\\src\\filePath\\1806.08894.pdf",
+        download:"filePath/1806.08894.pdf",
         email:"18983882089@163.com"
       },
       common: "",

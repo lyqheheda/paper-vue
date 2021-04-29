@@ -13,7 +13,7 @@
         </h2>
       </el-container>
       <el-container>
-        <el-main> 
+        <el-main>
           <el-form :model="paperDetail" :rules="rules" ref="paperDetail" label-width="100px" class="demo-ruleForm">
         <el-form-item label="title" prop="pname">
           <el-input v-model="paperDetail.pname"></el-input>
@@ -22,17 +22,17 @@
         <el-form-item label="abstract" prop="pabstract">
           <el-input type="textarea" v-model="paperDetail.pabstract"></el-input>
         </el-form-item>
-          
+
          <el-form-item label="keyword" prop="keyword">
           <el-input type="textarea" v-model="paperDetail.keyword"></el-input>
-        </el-form-item> 
-          
+        </el-form-item>
+
           <el-form-item label='category' prop='category'>
             <el-select v-model="paperDetail.category" filterable placeholder="请选择" style='margin-left: -830px;'>
     <el-option
       v-for="item in paperDetail.options"
       :key="item.value"
-      :label="item.label" 
+      :label="item.label"
       :value="item.value">
     </el-option>
   </el-select>
@@ -43,18 +43,22 @@
         <el-form-item label="#third author" prop="autid_three">
           <el-input v-model="paperDetail.autid_three"></el-input>
         </el-form-item>
-        
-        
 
-        <p>
-            上传pdf文件\url
-        </p>
-          
-          
-          
-          
-          
-          
+<!--            upload pdf paper file here-->
+            <el-upload
+                action="paperAdd"
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :on-success="handle_success"
+                accept=".pdf"
+                drag
+                :limit="1">
+              <i class="el-icon-upload"></i>
+              <div class="el-upload__text">Drag file here or <em>Click to upload</em></div>
+              <div slot="tip" class="el-upload__tip">Only one PDF file is acceptable, the maximum size is 10MB </div>
+            </el-upload>
+
+
         </el-form>
            </el-main>
         <el-footer>
@@ -70,116 +74,6 @@
         </el-footer>
       </el-container>
 
-      <!--      preview part:-->
-      <!-- <transition name="el-zoom-in-top">
-        <div v-show="online_preview" class="transition-box">
-          <el-container>
-           
-            <el-header>
-              {{ paperDetail.university }}
-            </el-header>
-            <el-container>
-              <el-aside
-                width="30px"
-                @click="closeAside()"
-                style="padding-top: 10px"
-              >
-                <el-a
-                  @click="closeAside()"
-                  style="text-align: center; height: 100%"
-                  >{{ asidePrompt }}</el-a
-                >
-              </el-aside>
-              <el-aside
-                width="300px"
-                style="padding-right: 30px; padding-top: 10px"
-                v-show="hasAside"
-              >
-                <div>点击隐藏</div>
-
-                <div>
-                  <div>
-                    <hr />
-                    <div class="block">
-                      <el-avatar
-                        shape="square"
-                        :size="80"
-                        :src="squareUrl"
-                      ></el-avatar>
-                    </div>
-                    <p>作者名称1</p>
-                    <p>北京交通大学</p>
-                    <hr />
-                    <p style="text-align: left">
-                      作者介绍：作者一是本篇论文的作者
-                    </p>
-                  </div>
-                </div>
-
-                <div>
-                  <div>
-                    <hr />
-                    <div class="block">
-                      <el-avatar
-                        shape="square"
-                        :size="80"
-                        :src="squareUrl"
-                      ></el-avatar>
-                    </div>
-                    <p>作者名称2</p>
-                    <p>北京交通大学</p>
-                    <hr />
-                    <p style="text-align: left">
-                      作者介绍：作者2是本篇论文的作者
-                    </p>
-                  </div>
-                </div>
-
-                <div>
-                  <div>
-                    <hr />
-                    <div class="block">
-                      <el-avatar
-                        shape="square"
-                        :size="80"
-                        :src="squareUrl"
-                      ></el-avatar>
-                    </div>
-                    <p>作者名称3</p>
-                    <p>北京交通大学</p>
-                    <hr />
-                    <p style="text-align: left">
-                      作者介绍：作者3是本篇论文的作者
-                    </p>
-                  </div>
-                </div>
-              </el-aside>
-
-              <el-main> -->
-                <!--            论文主体部分-->
-                <!-- <p>{{ paperDetail.pname }}</p>
-                <p>
-                  Author:{{ paperDetail.author_one }}&nbsp;&nbsp;{{
-                    paperDetail.author_two
-                  }}&nbsp;&nbsp;{{ paperDetail.author_three }}
-                </p>
-                <p>{{ paperDetail.author_one_institute }}</p>
-                <p class="mainText">{{ paperDetail.pabstract }}</p>
-
-                <p class="mainText">
-                  <strong>Abstract:&nbsp;{{ paperDetail.pkey }}</strong>
-                </p>
-                <p class="mainText">
-                  Category:&nbsp;{{ paperDetail.category }}
-                </p>
-                <p class="mainText">
-                  Public ID:&nbsp;{{ paperDetail.public_id }}
-                </p>
-              </el-main>
-            </el-container>
-          </el-container>
-        </div>
-      </transition> -->
     </div>
   </div>
 </template>
@@ -193,7 +87,7 @@ export default {
   data() {
     return {
       aut_id:-1,
-    paperDetail: {
+      paperDetail: {
       pname:'',
       pabstract:'',
       keyword:'',
@@ -218,7 +112,7 @@ export default {
       autid_two:-1,
       autid_three:-1,
         },
-      
+
       authorList: [
         {
           lastname: "Yunqi",
@@ -269,6 +163,21 @@ export default {
         this.online_preview === true ? "Preview ON " : "Preview OFF ";
       this.online_preview = !this.online_preview;
     },
+    handleRemove(file) {
+      return this.$confirm(`Remove success`);
+    },
+    handlePreview(file) {
+      console.log(file);
+      // preview after uploading
+
+
+      // window.open(file.paper)
+    },
+    handle_success(res) {
+      console.log(res)
+      console.log(res.paper)
+      return this.$confirm(`upload success`);
+    }
   },
   created() {
     const aut_id = this.$route.query.aut_id;

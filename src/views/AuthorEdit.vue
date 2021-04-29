@@ -13,7 +13,7 @@
         </h2>
       </el-container>
       <el-container>
-        <el-main> 
+        <el-main>
           <el-form :model="paperDetail" :rules="rules" ref="paperDetail" label-width="100px" class="demo-ruleForm">
         <el-form-item label="title" prop="pname">
           <el-input v-model="paperDetail.pname"></el-input>
@@ -21,17 +21,17 @@
         <el-form-item label="abstract" prop="pabstract">
           <el-input type="textarea" v-model="paperDetail.pabstract"></el-input>
         </el-form-item>
-          
+
          <el-form-item label="keyword" prop="keyword">
           <el-input type="textarea" v-model="paperDetail.keyword"></el-input>
-        </el-form-item> 
-          
+        </el-form-item>
+
           <el-form-item label='category' prop='category'>
             <el-select v-model="paperDetail.category" filterable placeholder="select" style='margin-left: -830px;'>
     <el-option
       v-for="item in paperDetail.options"
       :key="item.value"
-      :label="item.label" 
+      :label="item.label"
       :value="item.value">
     </el-option>
   </el-select>
@@ -42,8 +42,24 @@
         <el-form-item label="#third author" prop="autid_three">
           <el-input v-model="paperDetail.autid_three"></el-input>
         </el-form-item>
+
+<!--            upload pdf paper file here-->
+            <el-upload
+                action="paperAdd"
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :on-success="handle_success"
+                accept=".pdf"
+                drag
+                :limit="1">
+              <i class="el-icon-upload"></i>
+              <div class="el-upload__text">Drag file here or <em>Click to upload</em></div>
+              <div slot="tip" class="el-upload__tip">Only one PDF file is acceptable, the maximum size is 10MB </div>
+            </el-upload>
+
+
         </el-form>
-<el-upload
+<!-- <el-upload
   class="upload-demo"
   action="/author/paperAdd"
   :on-preview="handlePreview"
@@ -55,7 +71,7 @@
   :file-list="paperDetail.fileList">
   <el-button size="small" type="primary">Upload paper</el-button>
   <div slot="tip" class="el-upload__tip">Choose a pdf file</div>
-</el-upload>
+</el-upload> -->
 
            </el-main>
         <el-footer>
@@ -71,116 +87,6 @@
         </el-footer>
       </el-container>
 
-      <!--      preview part:-->
-      <!-- <transition name="el-zoom-in-top">
-        <div v-show="online_preview" class="transition-box">
-          <el-container>
-           
-            <el-header>
-              {{ paperDetail.university }}
-            </el-header>
-            <el-container>
-              <el-aside
-                width="30px"
-                @click="closeAside()"
-                style="padding-top: 10px"
-              >
-                <el-a
-                  @click="closeAside()"
-                  style="text-align: center; height: 100%"
-                  >{{ asidePrompt }}</el-a
-                >
-              </el-aside>
-              <el-aside
-                width="300px"
-                style="padding-right: 30px; padding-top: 10px"
-                v-show="hasAside"
-              >
-                <div>点击隐藏</div>
-
-                <div>
-                  <div>
-                    <hr />
-                    <div class="block">
-                      <el-avatar
-                        shape="square"
-                        :size="80"
-                        :src="squareUrl"
-                      ></el-avatar>
-                    </div>
-                    <p>作者名称1</p>
-                    <p>北京交通大学</p>
-                    <hr />
-                    <p style="text-align: left">
-                      作者介绍：作者一是本篇论文的作者
-                    </p>
-                  </div>
-                </div>
-
-                <div>
-                  <div>
-                    <hr />
-                    <div class="block">
-                      <el-avatar
-                        shape="square"
-                        :size="80"
-                        :src="squareUrl"
-                      ></el-avatar>
-                    </div>
-                    <p>作者名称2</p>
-                    <p>北京交通大学</p>
-                    <hr />
-                    <p style="text-align: left">
-                      作者介绍：作者2是本篇论文的作者
-                    </p>
-                  </div>
-                </div>
-
-                <div>
-                  <div>
-                    <hr />
-                    <div class="block">
-                      <el-avatar
-                        shape="square"
-                        :size="80"
-                        :src="squareUrl"
-                      ></el-avatar>
-                    </div>
-                    <p>作者名称3</p>
-                    <p>北京交通大学</p>
-                    <hr />
-                    <p style="text-align: left">
-                      作者介绍：作者3是本篇论文的作者
-                    </p>
-                  </div>
-                </div>
-              </el-aside>
-
-              <el-main> -->
-                <!--            论文主体部分-->
-                <!-- <p>{{ paperDetail.pname }}</p>
-                <p>
-                  Author:{{ paperDetail.author_one }}&nbsp;&nbsp;{{
-                    paperDetail.author_two
-                  }}&nbsp;&nbsp;{{ paperDetail.author_three }}
-                </p>
-                <p>{{ paperDetail.author_one_institute }}</p>
-                <p class="mainText">{{ paperDetail.pabstract }}</p>
-
-                <p class="mainText">
-                  <strong>Abstract:&nbsp;{{ paperDetail.pkey }}</strong>
-                </p>
-                <p class="mainText">
-                  Category:&nbsp;{{ paperDetail.category }}
-                </p>
-                <p class="mainText">
-                  Public ID:&nbsp;{{ paperDetail.public_id }}
-                </p>
-              </el-main>
-            </el-container>
-          </el-container>
-        </div>
-      </transition> -->
     </div>
   </div>
 </template>
@@ -211,8 +117,8 @@ export default {
       
       autid_two:undefined,
       autid_three:undefined,
-      fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, 
-      {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+      // fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, 
+      // {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
         },
          rules: {
           pname: [
@@ -235,7 +141,7 @@ export default {
           ],
           
         },
-      
+
       authorList: [
         {
           lastname: "Yunqi",
@@ -316,18 +222,27 @@ export default {
     resetForm(formName) {
         this.$refs[formName].resetFields();
       },
-       handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
       handleExceed(files, fileList) {
         this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
       },
       beforeRemove(file, fileList) {
         return this.$confirm(`确定移除 ${ file.name }？`);
-      }
+      },
+    handleRemove(file) {
+      return this.$confirm(`Remove success`);
+    },
+    handlePreview(file) {
+      console.log(file);
+      // preview after uploading
+
+
+      // window.open(file.paper)
+    },
+    handle_success(res) {
+      console.log(res)
+      console.log(res.paper)
+      return this.$confirm(`upload success`);
+    }
   },
   created() {
     

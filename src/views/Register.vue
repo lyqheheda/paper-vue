@@ -135,10 +135,11 @@
             alert('submit!');
             const _this = this
             this.$axios.post('/register', this.registerForm).then(res => { //这里是发送表单到后端
-            
-            if(res.data.code===400){//这里接受的对不对？
+            console.log('表单发送成功')
+            console.log(res)
+            if(res.data.data.code===0){//这里接受的对不对？
             alert('submit successfully!')
-              _this.$router.push("/blogs")
+              _this.$router.push("/")
 
             }
             else {
@@ -150,6 +151,10 @@
 
 
 
+            },
+            res=>{
+              console.log('失败')
+              console.log(res)
             })
           } else {
             console.log('error submit!!');
@@ -165,9 +170,9 @@
           }
           }
         ).then(res => {
-          console.log('====getUniversityID()res ')
-          console.log(res.data)
-          console.log('===')
+          // console.log('====getUniversityID()res ')
+          // console.log(res.data)
+          // console.log('===')
           _this.registerForm.universityID=res.data.data
           // console.log(_this.registerForm.universityID)
           _this.disabled=false

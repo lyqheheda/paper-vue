@@ -3,6 +3,7 @@
     <Header :showLogin="true"></Header>
 
     <el-container>
+      <!-- the side body -->
       <el-aside width="200px">
         <div style="margin-top: 15px" class="searchbox">
           <el-input
@@ -26,21 +27,23 @@
           </el-checkbox>
         </el-checkbox-group>
       </el-aside>
+      <!-- the main body -->
       <el-main>
         <h3> Paper Management </h3>
         <hr/>
         <div>
           <el-table :data="paperList" stripe style="margin:10px">
-            <el-table-column prop="pname" label="paper title" width="300px">
+            <el-table-column prop="pname" label="paper title" width="200px">
             </el-table-column>
-            <el-table-column prop="authorName" label="author" width="230px">
+            <el-table-column prop="authorName" label="author" width="150px">
             </el-table-column>
-            <el-table-column prop="category" label="category" width="220px">
             </el-table-column>
-            <el-table-column prop="publicID" label="state" width="100px">
+            <el-table-column prop="keyword" label="keyword" width="200px">
             </el-table-column>
-            <!-- <el-table-column prop="operation" label="operation">
-            </el-table-column> -->
+            <el-table-column prop="category" label="category" width="150px">
+            </el-table-column>
+            <el-table-column prop="publicId" label="state" width="100px">
+            </el-table-column>
             <el-table-column label="operations" width="100px">
               <template slot-scope="scope">
                 <el-button
@@ -80,10 +83,7 @@ export default {
     return {
       checkList: [],
       skeywords: "",
-      user: {
-        username: "",
-        aut_id: 0,
-      },
+        aut_id: undefined,
       author:{  //author类
         lastname:'',
         firstname:'',
@@ -96,13 +96,14 @@ export default {
       total: 0,
       pageSize: 5,
       paperList: [
-        {
-          pap_id:0,
-          pname: "placeholder",
-          category: "placeholder",
-          authorName: "placeholder",
-          publicID: 123123,
-        },
+        // {
+        //   pap_id:0,
+
+        //   pname: "placeholder",
+        //   category: "placeholder",
+        //   authorName: "placeholder",
+        //   publicID: "default",
+        // },
 
       ],
     };
@@ -123,23 +124,33 @@ export default {
       // console.log(this.checkList.includes('timeOrder'))
       // console.log('=====')
 
-      let params = {  //the form to be sent
-        aut_id: this.user.aut_id,
+      // let params = {  //the form to be sent
+      //   aut_id: this.user.aut_id,
+      //   currentPage: this.currentPage,
+      //   numEachPage: this.pageSize,
+      //   skeywords: this.skeywords,
+      //   timeOrder: this.checkList.includes("timeOrder"),
+      // };
+      // console.log('params:')  
+      // console.log(params)
+      const _this = this;
+      this.$axios.get("/author", {params :{  //the form to be sent
+        aut_id: this.aut_id,
         currentPage: this.currentPage,
         numEachPage: this.pageSize,
         skeywords: this.skeywords,
         timeOrder: this.checkList.includes("timeOrder"),
-      };
-      const _this = this;
-      _this.$axios.get("/author", params).then((res) => {// send form and get the paper list
-        console.log('========')
-        console.log(res.data.data);
-        console.log('========')
-        _this.paperList = res.data.data.records;
-        _this.currentPage = res.data.data.current;
-        _this.total = res.data.data.total;
-        _this.pageSize = res.data.data.size;
-        _this.author=res.data.data.Author;// 此处接是否接收到了？需要确认一下
+      }}).then((res) => {// send form and get the paper list
+        // console.log('========')
+        // console.log(res.data.data)
+        // console.log('========')
+        _this.paperList = res.data.data.ipage.records;
+        console.log('paperlist:')
+console.log(_this.paperList)
+        _this.currentPage = res.data.data.ipage.current;
+        _this.total = res.data.data.ipage.total;
+        _this.pageSize = res.data.data.ipage.size;
+        _this.author=res.data.data.authorInformation;// 此处接是否接收到了？需要确认一下
       });
     },
     handleReview(row) {// get the unique aut_id and paper id of each item and route to detail page
@@ -147,7 +158,7 @@ export default {
         // console.log(this.user.aut_id)
 
         this.$router.push({name:'AuthorEdit',
-        query:{aut_id: this.user.aut_id, pap_id:row.pap_id}});
+        query:{aut_id: this.aut_id, pap_id:row.pap_id}});
       },
   },
 
@@ -165,7 +176,9 @@ export default {
     //   console.log("没登上");
     // }
     if (this.$store.getters.getUser.aut_id) {    // get author id and store it
-      this.user.aut_id = this.$store.getters.getUser.aut_id;    
+      this.aut_id = this.$store.getters.getUser.aut_id;  
+      console.log('aut_id:')  
+      console.log(this.aut_id)
     }
     this.update();
   },

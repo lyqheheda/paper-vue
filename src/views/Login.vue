@@ -56,8 +56,10 @@
             const _this = this
             this.$axios.post('/login', this.ruleForm).then(res => {
 
-              console.log('======')
+              console.log('登录成功======')
               console.log(res.data)
+              console.log('res.headers: ')
+              console.log(res.headers)
               console.log('======')
               const jwt = res.headers['authorization']
               const userInfo = res.data.data   //////////////////////这一行里存了用户权限信息
@@ -67,9 +69,14 @@
               _this.$store.commit("SET_USERINFO", userInfo)
 
               // 获取
+              console.log('已存储的用户信息：')
               console.log(_this.$store.getters.getUser)
 
               _this.$router.push("/papers")
+            },
+            res=>{
+              console.log('登陆失败')
+              console.log(res)
             })
 
           } else {

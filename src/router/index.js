@@ -10,6 +10,8 @@ import Test from '../views/Test.vue'
 import PaperReview from '../views/PaperReview.vue'
 import Author from "../views/Author.vue";
 import AuthorEdit from "../views/AuthorEdit.vue";
+import AuthorAdd from "../views/AuthorAdd.vue";
+
 import paperVerify from "../views/paperVerify"
 
 Vue.use(VueRouter)
@@ -84,7 +86,7 @@ const routes = [
   {
     path: '/author/paperAdd',
     name: 'AddPaper',
-    component: AuthorEdit,
+    component: AuthorAdd,
   },
   {
     path: '/paperVerify',

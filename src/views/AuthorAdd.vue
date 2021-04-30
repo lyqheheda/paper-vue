@@ -100,7 +100,6 @@ export default {
   data() {
     return {
       autid:undefined,  //default: -1
-      pap_id:'',
       disabled:true,
     paperDetail: {
       pname:'',
@@ -202,7 +201,6 @@ export default {
       console.log(this.paperDetail)
       const form={
         autid:this.autid,
-        paper_id:this.pap_id,
         pname:this.paperDetail.pname,
         pabstract:this.paperDetail.pabstract,
         keyword:this.paperDetail.keyword,
@@ -218,7 +216,7 @@ export default {
         if (valid) {
           
           const _this = this
-          this.$axios.post('/author/paperEdit', form).then(res => {
+          this.$axios.post('/author/paperAddDB', form).then(res => {
             
           // console.log('=====res.data.code')
             // console.log(res.data.code)
@@ -276,7 +274,6 @@ export default {
     this.autid = this.$store.getters.getUser.aut_id
      
     const pap_id=this.$route.query.pap_id;
-    this.pap_id=this.$route.query.pap_id;
         // 编辑现有的论文
       if(pap_id){
   const _this = this;

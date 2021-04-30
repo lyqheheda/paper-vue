@@ -120,13 +120,13 @@ export default {
       const form={
         rev_id: this.rev_id,
         pap_id: this.pap_id,
-        common: this.common,
+        // common: this.common,
         isPass: isPass
       }
       console.log(form)
       console.log('=====')
           const _this = this
-          this.$axios.post('reviewer/paperReview', form).then(res => {//这个接口对吗
+          this.$axios.post('/reviewer/paperReview', form).then(res => {//这个接口对吗
 
             console.log(res.data.code)
             //试一下 这个行不？
@@ -146,7 +146,7 @@ export default {
       console.log(form)
       console.log('=====')
           const _this = this
-          this.$axios.post('reviewer/paperReview', form).then(res => {//这个接口对吗
+          this.$axios.post('/reviewer/paperReview', form).then(res => {//这个接口对吗
 
             console.log(res.data.code)
             //试一下 这个行不？

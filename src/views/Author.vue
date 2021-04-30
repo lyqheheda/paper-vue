@@ -38,7 +38,9 @@
             <el-table-column prop="authorName" label="author" width="150px">
             </el-table-column>
             </el-table-column>
-            <el-table-column prop="keyword" label="keyword" width="200px">
+            <el-table-column prop="keyword" label="keyword" width="130px">
+            </el-table-column>
+            <el-table-column prop="pcreateTime" label="create time" width="70px">
             </el-table-column>
             <el-table-column prop="category" label="category" width="150px">
             </el-table-column>
@@ -169,11 +171,15 @@ export default {
       deleteReview(row){
         const _this = this;
       this.$axios.get("/authorDelete", {params :{  //the form to be sent
-        pap_id: _this.pap_id,
+        pap_id: row.pap_id,
       }}).then((res)=>{
-        if(res.data.data.complete){
-          _this.update()
-        }
+        console.log('okkkkkk')
+        console.log(res)
+        location.reload()
+        
+      },
+      res=>{
+        console.log("失败")
       })
 
       },
@@ -183,12 +189,14 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.deleteReview(row).then(()=>{
+          console.log('row')
+          console.log(row)
+          this.deleteReview(row)
             this.$message({
             type: 'success',
             message: '删除成功!'
           });
-          })
+          
           
 
         }).catch(() => {

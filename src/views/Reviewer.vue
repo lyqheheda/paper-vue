@@ -6,7 +6,7 @@
       <el-aside width="200px">
         <div style="margin-top: 15px" class="searchbox">
           <el-input
-            placeholder="关键词"
+            placeholder="keywords"
             v-model="keywords"
             class="input-with-select"
           >
@@ -20,7 +20,7 @@
 
         <el-checkbox-group v-model="checkList" class="checkbox" >
           <el-checkbox label="showPassed" @change="update" style="margin-left: 10px"
-            >show reviewed</el-checkbox
+            >show unreviewed</el-checkbox
           >
           <hr style="margin: 5px 0px;color: #E9EEF3">
           <el-checkbox label="timeOrder" @change="update" style="margin-left: 10px"
@@ -38,6 +38,8 @@
             <el-table-column prop="authorName" label="author" width="150px">
             </el-table-column>
             <el-table-column prop="keyword" label="keyword" width="200px">
+            </el-table-column>
+            <el-table-column prop="pcreateTime" label="create time" width="70px">
             </el-table-column>
             <el-table-column prop="category" label="category" width="150px">
           </el-table-column>
@@ -82,7 +84,7 @@ export default {
   components: { Header },
   data() {
     return {
-      checkList: ["showPassed"],
+      checkList: [],
       keywords: "",
         rev_id: 0,
       hasLogin: false, //这个咋用？

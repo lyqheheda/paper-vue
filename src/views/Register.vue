@@ -61,8 +61,8 @@
     <el-input v-model="registerForm.tel"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('registerForm')">立即创建</el-button>
-    <el-button @click="resetForm('registerForm')">重置</el-button>
+    <el-button type="primary" @click="submitForm('registerForm')">Register</el-button>
+    <el-button @click="resetForm('registerForm')">Reset</el-button>
   </el-form-item>
 </el-form>
 </el-main>

@@ -26,7 +26,7 @@
                 {{ blog.pname }}
               </router-link>
             </h4>
-            <p>author: {{ blog.autOne  +' '+blog.autTwo+' '+blog.autThree}}</p>
+            <p>author: {{ blog.autOne }}</p>
             <p>keywords: {{ blog.keyWord }}</p>
             <p>abstract:{{blog.pabstract}}</p>
           </el-card>

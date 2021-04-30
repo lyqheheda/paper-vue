@@ -7,7 +7,7 @@
       <el-aside width="200px">
         <div style="margin-top: 15px" class="searchbox">
           <el-input
-              placeholder="关键词"
+              placeholder="keywords"
               v-model="keywords"
               class="input-with-select"
           >
@@ -184,9 +184,9 @@ export default {
 
       },
       open(row) {
-        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+        this.$confirm('Are you sure to delete this paper?', 'warning', {
+          confirmButtonText: 'Yes',
+          cancelButtonText: 'No',
           type: 'warning'
         }).then(() => {
           console.log('row')

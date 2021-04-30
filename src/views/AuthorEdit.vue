@@ -106,12 +106,15 @@ export default {
       pabstract:'',
       keyword:'',
       options:[{//
-          value: 'A',
-          label: 'data mining'
+          value: 'Deep leaning',
+          label: 'Deep learning'
         }, {
-          value: 'B',
-          label: 'computer graphics'
-        },
+          value: 'Artificial intelligence',
+          label: 'Artificial intelligence'
+        },{
+          value:'Internet of things',
+          label:'Internet of things'
+        }
         ],
         category: '',
       file_url:'',

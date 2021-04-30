@@ -130,8 +130,11 @@ export default {
 
             console.log(res.data.code)
             //试一下 这个行不？
-            _this.$router.push("reviewer")
+            _this.$router.push("/reviewer")
         
+          },()=>{
+            _this.$router.push("/reviewer")
+
           })
    
     },
@@ -150,8 +153,12 @@ export default {
 
             console.log(res.data.code)
             //试一下 这个行不？
-            _this.$router.push("reviewer")
+            _this.$router.push("/reviewer")
         
+          },
+          ()=>{
+            _this.$router.push("/reviewer")
+
           })
    
     },
@@ -190,7 +197,7 @@ export default {
           // _this.paperDetail.autid_two=res.data.data.authorDetails[1].autId
           // _this.paperDetail.autid_three=res.data.data.authorDetails[2].autId
           // _this.authorList=res.data.data.authorDetails
-
+          
           console.log(_this.authorList)         
 // _this.paperDetail.file_url=res.data.data.
 

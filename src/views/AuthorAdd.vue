@@ -9,7 +9,7 @@
           style="margin: 10px 20px 10px 10px"
         ></el-avatar> -->
         <h2 style="font-family: 'Times New Roman'">
-          WELCOME {{ authorList[0].aname }} 
+          Add Paper
         </h2>
       </el-container>
       <el-container>

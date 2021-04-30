@@ -51,6 +51,12 @@
                     type="text"
                     size="big"
                 >edit</el-button>
+                <el-button type="text" @click="open(scope.row)">delete</el-button>
+                <!-- <el-button
+                    @click="deleteReview(scope.row)"
+                    type="text"
+                    size="big"
+                >delete</el-button> -->
 
               </template>
             </el-table-column>
@@ -160,6 +166,39 @@ export default {
         this.$router.push({name:'AuthorEdit',
         query:{aut_id: this.aut_id, pap_id:row.pap_id}});
       },
+      deleteReview(row){
+        const _this = this;
+      this.$axios.get("/authorDelete", {params :{  //the form to be sent
+        pap_id: _this.pap_id,
+      }}).then((res)=>{
+        if(res.data.data.complete){
+          _this.update()
+        }
+      })
+
+      },
+      open(row) {
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.deleteReview(row).then(()=>{
+            this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+          })
+          
+
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
+      },
+      
   },
 
   created() {

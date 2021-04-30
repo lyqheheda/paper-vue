@@ -78,7 +78,7 @@
           <!-- <el-button type="primary" @click="onPreveiw()"
             >{{ online_preview_msg }}<i class="el-icon-view"></i
           ></el-button> -->
-          <el-button type="success" @click="submitForm('paperDetail')"
+          <el-button type="success" @click="submitForm('paperDetail')" :disabled='disabled'
             >Submit&nbsp;<i class="el-icon-star-off"></i
           ></el-button>
           <el-button type="danger" @click="resetForm('paperDetail')"
@@ -99,7 +99,8 @@ export default {
 
   data() {
     return {
-      aut_id:undefined,  //default: -1
+      autid:undefined,  //default: -1
+      disabled:true,
     paperDetail: {
       pname:'',
       pabstract:'',
@@ -115,8 +116,8 @@ export default {
         category: '',
       file_url:'',
       
-      autid_two:undefined,
-      autid_three:undefined,
+      autid_two:'',
+      autid_three:'',
       // fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, 
       // {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
         },
@@ -196,21 +197,36 @@ export default {
       console.log('=====')
       console.log(this.paperDetail)
       const form={
-        aut_id:this.aut_id,
-        paperDetail:this.paperDetail
+        autid:this.autid,
+        pname:this.paperDetail.pname,
+        pabstract:this.paperDetail.pabstract,
+        keyword:this.paperDetail.keyword,
+        file_url:this.paperDetail.file_url,
+        autid_two:this.paperDetail.autid_two,
+        autid_three:this.paperDetail.autid_three,
+        category:this.paperDetail.category
+
+
       }
-      console.log(form)
-      console.log('=====')
+      // console.log(form)
       this.$refs[formName].validate((valid) => {
         if (valid) {
-
+          
           const _this = this
-          this.$axios.post('/author/paperAdd', form).then(res => {//这个接口对吗
-
-            console.log(res.data.code)
-            //试一下 这个行不？
+          this.$axios.post('/author/paperAddDB', form).then(res => {
+            
+          // console.log('=====res.data.code')
+            // console.log(res.data.code)
+            alert('submit successfully!')
+          
             _this.$router.push("/author")
         
+          },
+          res=>{
+            console.log('???')
+            alert('submit successfully!')
+            _this.$router.push("/author")
+
           })
 
         } else {
@@ -241,13 +257,18 @@ export default {
     handle_success(res) {
       console.log(res)
       console.log(res.paper)
+      this.paperDetail.file_url=res.paper
+      console.log('===')
+      console.log(this.paperDetail.file_url)
+      this.disabled=false
+
       return this.$confirm(`upload success`);
     }
   },
   created() {
     
     
-    this.aut_id = this.$store.getters.getUser.aut_id
+    this.autid = this.$store.getters.getUser.aut_id
      
     const pap_id=this.$route.query.pap_id;
         // 编辑现有的论文

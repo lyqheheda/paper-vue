@@ -8,46 +8,6 @@
           {{ paper.university }}
         </el-header>
         <el-container>
-          <!-- <el-aside width="30px" @click="closeAside()" style="padding-top: 10px">
-            <el-a @click="closeAside()" style="text-align: center;height: 100%">{{asidePrompt}}</el-a>
-          </el-aside> -->
-          <!-- <el-aside width="300px" style="padding-right: 30px;padding-top: 10px" v-show="hasAside">
-            <div>点击隐藏</div>
-
-            <div>
-              <div>
-                <hr>
-                <div class="block"><el-avatar shape="square" :size="80" :src="squareUrl"></el-avatar></div>
-                <p>作者名称1</p>
-                <p>北京交通大学</p>
-                <hr>
-                <p style="text-align: left">作者介绍：作者一是本篇论文的作者</p>
-              </div>
-            </div>
-
-            <div>
-              <div>
-                <hr>
-                <div class="block"><el-avatar shape="square" :size="80" :src="squareUrl"></el-avatar></div>
-                <p>作者名称2</p>
-                <p>北京交通大学</p>
-                <hr>
-                <p style="text-align: left">作者介绍：作者2是本篇论文的作者</p>
-              </div>
-            </div>
-
-            <div>
-              <div>
-                <hr>
-                <div class="block"><el-avatar shape="square" :size="80" :src="squareUrl"></el-avatar></div>
-                <p>作者名称3</p>
-                <p>北京交通大学</p>
-                <hr>
-                <p style="text-align: left">作者介绍：作者3是本篇论文的作者</p>
-              </div>
-            </div>
-          </el-aside> -->
-
           <el-main>
 <!--            论文主体部分-->
             <p>{{ paper.pname }}</p>

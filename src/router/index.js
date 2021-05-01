@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Blogs from '../views/Blogs.vue'
-import BlogEdit from '../views/BlogEdit.vue'
 import BlogDetail from '../views/BlogDetail.vue'
 import Register from '../views/Register.vue'
 import Reviewer from '../views/Reviewer.vue'
@@ -32,14 +31,14 @@ const routes = [
     name: 'Login',
     component: Login
   },
-  {
-    path: '/blog/add',
-    name: 'BlogAdd',
-    component: BlogEdit,
-    meta: {
-      requireAuth: true
-    }
-  },
+  // {
+  //   path: '/blog/add',
+  //   name: 'BlogAdd',
+  //   component: BlogEdit,
+  //   meta: {
+  //     requireAuth: true
+  //   }
+  // },
   {
     path: '/paperDetail/:blogId',
     name: 'BlogDetail',
@@ -50,14 +49,14 @@ const routes = [
     name: 'Register',
     component: Register
   },
-  {
-    path: '/blog/:blogId/edit',
-    name: 'BlogEdit',
-    component: BlogEdit,
-    meta: {
-      requireAuth: true
-    }
-  },
+  // {
+  //   path: '/blog/:blogId/edit',
+  //   name: 'BlogEdit',
+  //   component: BlogEdit,
+  //   meta: {
+  //     requireAuth: true
+  //   }
+  // },
   {
     path: '/reviewer',
     name: 'Reviewer',

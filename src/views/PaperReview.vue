@@ -55,15 +55,15 @@
           >
           </el-input>
         </div>
-        <!--        reviewer action-->
-        <!--        reviewer action-->
-        <el-footer style="margin-bottom: 50px; text-align: right">
-          <el-button type="primary" @click="">
-            <a
-              v-bind:href="paperDetail.download"
-              download="paper.pdf"
-              style="text-decoration: none"
-            >
+<!--        reviewer action-->
+<!--        reviewer action-->
+        <el-footer style="margin-bottom: 50px;text-align: right">
+
+          <el-button type="primary" @click="handleDownload">
+<!--            download tab a-->
+<!--            <a v-bind:href="paperDetail.download" download="paper.pdf" style="text-decoration: none" >-->
+<!--            open window tab a-->
+            <a v-bind:href="paperDetail.download" target="_blank" style="text-decoration: none" >
               Download PDF
             </a>
             <i class="el-icon-download"></i
@@ -120,8 +120,8 @@ export default {
         category: "航空航天科学与工程; 计算机软件及计算机应用",
         publicID: "10.27522/d.cnki.gkcgs.2021.000004",
         // download URL !!!!!!!!!attention !!!!!!!!!!!!
-        download: "filePath/1806.08894.pdf",
-        email: "18983882089@163.com",
+        download:"D:\\da san xia\\212\\demo10-1\\untitled\\src\\main\\resources\\static\\16198002362092 Privacy_【彩云小译】.pdf",
+        email:"18983882089@163.com"
       },
       common: "",
     };
@@ -181,6 +181,14 @@ export default {
         this.online_preview === true ? "在线预览" : "关闭预览";
       this.online_preview = !this.online_preview;
     },
+    // this function handle download URL from backend to use in frontend.
+    handleDownload() {
+      var remoteFileSrc = this.paperDetail.download.replace(/\\/g,"/");
+      console.log("handle get url", this.paperDetail.download);
+      var remoteIP = "http://10.129.158.217:9000/";
+      this.paperDetail.download = remoteIP + remoteFileSrc.slice(remoteFileSrc.indexOf("static"));
+      console.log("return download url", this.paperDetail.download);
+    }
   },
   // Author: Lin Yunqi
   // This method obtain two parameters in the url and send a GET request to the backend to obtain information

@@ -185,7 +185,7 @@ export default {
     handleDownload() {
       var remoteFileSrc = this.paperDetail.download.replace(/\\/g,"/");
       console.log("handle get url", this.paperDetail.download);
-      var remoteIP = "http://10.129.158.217:9000/";
+      var remoteIP = "http://10.130.16.1:9000/";
       this.paperDetail.download = remoteIP + remoteFileSrc.slice(remoteFileSrc.indexOf("static"));
       console.log("return download url", this.paperDetail.download);
     }

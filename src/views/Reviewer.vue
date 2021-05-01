@@ -1,4 +1,10 @@
 <template>
+<!-- 
+Author: Lin Yunqi
+This component refers to Review management page of the website.
+It provides a table of papers to be reviewed by the reviewer.
+The aside body contains a search box and checkbox which provides more accurate classification
+ -->
   <div>
     <Header :showLogin="true"></Header>
 

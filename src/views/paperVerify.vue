@@ -1,10 +1,16 @@
 <template>
+<!-- 
+  Author: LinYunqi, ShiZhancheng
+  This component is useds to verify whether a uploaded paper is passed or rejected.
+ -->
 <div>
     <Header :showLogin="true"></Header>
     <h1>
         Verify your paper
     </h1>
     <el-divider></el-divider>
+
+    <!-- Author: Shi zhancheng -->
     <div class='upload-demo'>
     <el-upload  
                 action="/paperVerify"

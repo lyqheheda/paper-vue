@@ -1,4 +1,12 @@
 <template>
+<!-- 
+Author: Lin Yunqi
+This component refers to Paper management page of the website.
+It provides a table of papers submitted by the author.
+The aside body contains a search box and checkbox which provides more accurate classification
+ -->
+
+
   <div>
     <Header :showLogin="true"></Header>
 
@@ -54,11 +62,7 @@
                     size="big"
                 >edit</el-button>
                 <el-button type="text" @click="open(scope.row)">delete</el-button>
-                <!-- <el-button
-                    @click="deleteReview(scope.row)"
-                    type="text"
-                    size="big"
-                >delete</el-button> -->
+     
 
               </template>
             </el-table-column>
@@ -91,141 +95,109 @@ export default {
     return {
       checkList: [],
       keywords: "",
-        aut_id: undefined,
-      author:{  //author类
-        lastname:'',
-        firstname:'',
-        authorInstitute:'',
-        image:'',
-        rtype:'',
+      aut_id: undefined,
+      author: {
+        lastname: "",
+        firstname: "",
+        authorInstitute: "",
+        image: "",
+        rtype: "",
       },
-      hasLogin: false, //hasn't used yet. this is used to classify user priviledge
+      hasLogin: false, //this is used to classify user priviledge
       currentPage: 1,
       total: 0,
       pageSize: 5,
-      paperList: [
-        // {
-        //   pap_id:0,
-
-        //   pname: "placeholder",
-        //   category: "placeholder",
-        //   authorName: "placeholder",
-        //   publicID: "default",
-        // },
-
-      ],
+      paperList: [],
     };
   },
   methods: {
-    // page(currentPage) {
-    //   const _this = this;
-    //   _this.$axios.get("/reviewer?currentPage=" + currentPage).then((res) => {
-    //     console.log(res);
-    //     _this.paperList = res.data.data.records;
-    //     _this.currentPage = res.data.data.current;
-    //     _this.total = res.data.data.total;
-    //     _this.pageSize = res.data.data.size;
-    //   });
-    // },
-    update() {  //called when checkbox is checked
-      // console.log(this.checkList)
-      // console.log(this.checkList.includes('timeOrder'))
-      // console.log('=====')
+    update() {
+      //called when checkbox is checked
 
-      // let params = {  //the form to be sent
-      //   aut_id: this.user.aut_id,
-      //   currentPage: this.currentPage,
-      //   numEachPage: this.pageSize,
-      //   skeywords: this.skeywords,
-      //   timeOrder: this.checkList.includes("timeOrder"),
-      // };
-      // console.log('params:')  
-      // console.log(params)
       const _this = this;
-      this.$axios.get("/author", {params :{  //the form to be sent
-        aut_id: this.aut_id,
-        currentPage: this.currentPage,
-        numEachPage: this.pageSize,
-        keywords: this.keywords,
-        timeOrder: this.checkList.includes("timeOrder"),
-      }}).then((res) => {// send form and get the paper list
-        // console.log('========')
-        // console.log(res.data.data)
-        // console.log('========')
-        _this.paperList = res.data.data.ipage.records;
-        console.log('paperlist:')
-        console.log(_this.paperList)
-        _this.currentPage = res.data.data.ipage.current;
-        _this.total = res.data.data.ipage.total;
-        _this.pageSize = res.data.data.ipage.size;
-        _this.author=res.data.data.authorInformation;// 此处接是否接收到了？需要确认一下
+      this.$axios
+        .get("/author", {
+          params: {
+            //the form to be sent
+            aut_id: this.aut_id,
+            currentPage: this.currentPage,
+            numEachPage: this.pageSize,
+            keywords: this.keywords,
+            timeOrder: this.checkList.includes("timeOrder"),
+          },
+        })
+        .then((res) => {
+          // send form and get the paper list
+
+          _this.paperList = res.data.data.ipage.records;
+          console.log("paperlist:");
+          console.log(_this.paperList);
+          _this.currentPage = res.data.data.ipage.current;
+          _this.total = res.data.data.ipage.total;
+          _this.pageSize = res.data.data.ipage.size;
+          _this.author = res.data.data.authorInformation;
+        });
+    },
+    handleReview(row) {
+      // get the unique aut_id and paper id of each item and route to detail page
+      // console.log(row);
+      // console.log(this.user.aut_id)
+
+      this.$router.push({
+        name: "AuthorEdit",
+        query: { aut_id: this.aut_id, pap_id: row.pap_id },
       });
     },
-    handleReview(row) {// get the unique aut_id and paper id of each item and route to detail page
-        // console.log(row);
-        // console.log(this.user.aut_id)
-
-        this.$router.push({name:'AuthorEdit',
-        query:{aut_id: this.aut_id, pap_id:row.pap_id}});
-      },
-      deleteReview(row){
-        const _this = this;
-      this.$axios.get("/authorDelete", {params :{  //the form to be sent
-        pap_id: row.pap_id,
-      }}).then((res)=>{
-        console.log('okkkkkk')
-        console.log(res)
-        location.reload()
-        
-      },
-      res=>{
-        console.log("失败")
+    deleteReview(row) {
+      const _this = this;
+      this.$axios
+        .get("/authorDelete", {
+          params: {
+            //the form to be sent
+            pap_id: row.pap_id,
+          },
+        })
+        .then(
+          (res) => {
+            console.log("okkkkkk");
+            console.log(res);
+            location.reload();
+          },
+          (res) => {
+            console.log("失败");
+          }
+        );
+    },
+    open(row) {
+      this.$confirm("Are you sure to delete this paper?", "warning", {
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+        type: "warning",
       })
-
-      },
-      open(row) {
-        this.$confirm('Are you sure to delete this paper?', 'warning', {
-          confirmButtonText: 'Yes',
-          cancelButtonText: 'No',
-          type: 'warning'
-        }).then(() => {
-          console.log('row')
-          console.log(row)
-          this.deleteReview(row)
-            this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
-          
-          
-
-        }).catch(() => {
+        .then(() => {
+          console.log("row");
+          console.log(row);
+          this.deleteReview(row);
           this.$message({
-            type: 'info',
-            message: '已取消删除'
-          });          
+            type: "success",
+            message: "删除成功!",
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
         });
-      },
-      
+    },
   },
 
   created() {
-    // this.page(1);
-    // if (this.$store.getters.getUser.uname) {
-    //   this.user.username = this.$store.getters.getUser.uname;
-
-    //   console.log("123123123");
-    //   console.log(this.$store.getters.getUser.uname);
-    //   console.log("123123123");
-
-    //   this.hasLogin = true; //此变量不需要全局。
-    // } else {
-    //   console.log("没登上");
-    // }
-    if (this.$store.getters.getUser.aut_id) {    // get author id and store it
-      this.aut_id = this.$store.getters.getUser.aut_id;  
-      console.log('aut_id:')  
-      console.log(this.aut_id)
+    if (this.$store.getters.getUser.aut_id) {
+      // get author id and store it
+      this.aut_id = this.$store.getters.getUser.aut_id;
+      console.log("aut_id:");
+      console.log(this.aut_id);
     }
     this.update();
   },
@@ -283,5 +255,4 @@ body > .el-container {
 .checkbox {
   margin: 15px 20px;
 }
-
 </style>

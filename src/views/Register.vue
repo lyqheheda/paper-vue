@@ -1,4 +1,9 @@
 <template>
+<!-- 
+  Author: Lin Yunqi
+  This component refers to the register page.
+  It supports form validation.
+ -->
     <div>
       <el-container>
       <el-header>
@@ -9,9 +14,7 @@
   
   <el-form-item label="user type" prop="rname">
     <el-select v-model="registerForm.rname" placeholder="please select">
-      <!-- A代表作者 -->
       <el-option label="author" value="A"></el-option> 
-<!-- B代表审稿人 -->
       <el-option label="reviewer" value="B"></el-option>
     </el-select>
   </el-form-item>
@@ -29,8 +32,6 @@
 
     </el-select>
   </el-form-item> 
-  <!-- {{this.registerForm.universityID}} -->
-<!-- list of institute -->
   <el-form-item label="institute" prop="institute" >
     <el-select v-model="registerForm.institute" placeholder="please select" @change='getInstituteID' :disabled='disabled'>
       <el-option label="Computer" value="Computer"></el-option> 
@@ -38,10 +39,6 @@
       <el-option label="Environment" value="Environment"></el-option>   
     </el-select>
   </el-form-item>
-   <!-- {{this.registerForm.instituteID}} -->
-  <!-- <el-form-item label="Author id"  prop="aut_id" v-if="registerForm.rname==='A'">
-    <el-input v-model="registerForm.aut_id"></el-input>
-  </el-form-item> -->
   <el-form-item label="user name" prop="uname">
     <el-input v-model="registerForm.uname"></el-input>
   </el-form-item>
@@ -80,7 +77,7 @@
           // aut_id: '',
           uname:'',
           password:'',
-          rname: '', //权限名称，A代表作者,B审稿人
+          rname: '', //
           firstname:'',
           lastname:'',
           searchWords:'',//name of university

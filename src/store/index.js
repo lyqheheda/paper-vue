@@ -1,3 +1,12 @@
+// Author: Lin Yunqi
+// This js file is used to store user info in session storage of Chrome.
+// Whenever user info is needed, the other component can obtain it by invoking getters. 
+// User info can also be cleaned by setters when log out
+
+
+
+
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -12,11 +21,11 @@ export default new Vuex.Store({
     // set 
     SET_TOKEN: (state, token) => {
       state.token = token
-      localStorage.setItem("token", token) //浏览器关闭了也可以存在本地
+      localStorage.setItem("token", token)
     },
     SET_USERINFO: (state, userInfo) => {
       state.userInfo = userInfo
-      sessionStorage.setItem("userInfo", JSON.stringify(userInfo))//sessionstorage只能存字符串。关闭浏览器会丢失
+      sessionStorage.setItem("userInfo", JSON.stringify(userInfo))
     },
     REMOVE_INFO: (state) => {
       state.token = ''

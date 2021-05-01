@@ -1,4 +1,10 @@
 <template>
+<!-- 
+  Author: Lin Yunqi
+  This component refers to the login page of the website.
+  It collects the username and password, send them to backend and store information obtained from backend
+  It also support form validation to prevent blank submit
+ -->
   <div>
     <!-- <Header :showLogin='false' ></Header> -->
 
@@ -62,13 +68,13 @@
               console.log(res.headers)
               console.log('======')
               const jwt = res.headers['authorization']
-              const userInfo = res.data.data   //////////////////////这一行里存了用户权限信息
+              const userInfo = res.data.data   
 
-              // 把数据共享出去
+              // share the data retrived from backend
               _this.$store.commit("SET_TOKEN", jwt)
               _this.$store.commit("SET_USERINFO", userInfo)
 
-              // 获取
+              
               console.log('已存储的用户信息：')
               console.log(_this.$store.getters.getUser)
 

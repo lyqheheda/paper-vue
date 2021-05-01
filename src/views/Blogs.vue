@@ -1,4 +1,10 @@
 <template>
+<!-- 
+Author: Lin Yunqi
+This component refers to the homepage of the website.
+It contains a searchbox, a pagination button and blocks to show overview information of papers.
+
+ -->
   <div class="mcontaner" style="width: 1200px;">
     <Header :showLogin='true'></Header>
 

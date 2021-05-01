@@ -1,15 +1,19 @@
 <template>
+<!-- 
+  Author: Lin Yunqi, Shi Zhancheng
+  This component is used to exhibit the detail info of a paper
+ -->
   <div>
     <Header></Header>
     <div class="mblog">
       <el-container>
-<!--        头部-->
+<!--        header-->
         <el-header>
           {{ paper.university }}
         </el-header>
         <el-container>
           <el-main>
-<!--            论文主体部分-->
+<!--            main part-->
             <p>{{ paper.pname }}</p>
             <p>Author:{{paper.author_one}}&nbsp;&nbsp;{{paper.author_two}}&nbsp;&nbsp;{{paper.author_three}}</p>
             <p>{{paper.author_one_institute}}</p>
@@ -22,12 +26,7 @@
 
           </el-main>
         </el-container>
-        <!-- <el-footer>
-          <el-button type="primary" @click="onPreveiw()">{{online_preview_msg}}<i class="el-icon-view"></i></el-button>
-          <el-button type="primary" @click="">点击收藏<i class="el-icon-star-off" ></i></el-button>
-          <el-button type="primary" @click="">文档下载<i class="el-icon-download"></i></el-button>
-          <el-button type="primary" @click="">联系作者<i class="el-icon-phone-outline"></i></el-button>
-        </el-footer> -->
+ 
       </el-container>
     </div>
 
@@ -93,6 +92,11 @@
         this.online_preview = !this.online_preview;
       },
     },
+
+
+    // Author: Lin Yunqi
+    // This method obtain a parameter in the url and send a GET request to the backend to obtain information 
+    // to be exhibited
     created() {
       const paperId = this.$route.params.blogId
       console.log(paperId)

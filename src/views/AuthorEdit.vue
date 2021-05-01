@@ -1,4 +1,7 @@
 <template>
+<!-- 
+  See AuthorAdd.vue
+ -->
   <div>
     <Header :showLogin="true"></Header>
     <div>

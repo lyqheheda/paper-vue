@@ -1,3 +1,5 @@
+// Author: Lin Yunqi
+// This code is used to solve cross-domain problem
 module.exports = {
 //   publicPath: '/',
   devServer: {

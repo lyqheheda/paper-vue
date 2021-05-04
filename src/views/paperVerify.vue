@@ -5,14 +5,13 @@
  -->
 <div>
     <Header :showLogin="true"></Header>
-    <h1>
+    <h1 style="margin-left:38%;">
         Verify your paper
     </h1>
     <el-divider></el-divider>
 
     <!-- Author: Shi zhancheng -->
-    <div class='upload-demo'>
-    <el-upload  
+    <el-upload style="margin-left:35%;"  
                 action="/paperVerify"
                 :on-preview="handlePreview"
                 :on-remove="handleRemove"
@@ -24,7 +23,8 @@
               <div class="el-upload__text">Drag file here or <em>Click to upload</em></div>
               <div slot="tip" class="el-upload__tip">Only one PDF file is acceptable, the maximum size is 10MB </div>
             </el-upload>
-    </div>
+
+    
 
     <el-divider></el-divider>
     <h2>{{msg}}</h2>

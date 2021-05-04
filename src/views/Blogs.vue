@@ -11,7 +11,7 @@ It contains a searchbox, a pagination button and blocks to show overview informa
     <div class="search" style="margin-top: 15px;">
       <el-form ref="ruleForm" :model="ruleForm" :rules="rules">
         <el-form-item prop='input'>
-          <el-input v-model="ruleForm.input" class="input-with-select" placeholder="请输入内容">
+          <el-input v-model="ruleForm.input" class="input-with-select" placeholder="Please input content">
             <el-select slot="prepend" v-model="ruleForm.select" placeholder="请选择" style='width:150px;'>
               <el-option label="paper title" value="pname"></el-option>
               <el-option label="author" value="author"></el-option>
@@ -25,7 +25,8 @@ It contains a searchbox, a pagination button and blocks to show overview informa
     <div class="block">
       <el-timeline>
 
-        <el-timeline-item v-for="blog in blogs" :timestamp="blog.pcreateTime" placement="top">
+        <!-- <el-timeline-item v-for="blog in blogs" :timestamp="blog.pcreateTime" placement="top" v-show="blog.publicId=='Passed'"> -->
+     <el-timeline-item v-for="blog in blogs" :timestamp="blog.pcreateTime" placement="top" >
           <el-card>
             <h4>
               <router-link :to="{name: 'BlogDetail', params: {blogId: blog.paperId}}">
@@ -35,6 +36,8 @@ It contains a searchbox, a pagination button and blocks to show overview informa
             <p>author: {{ blog.autOne }}</p>
             <p>keywords: {{ blog.keyWord }}</p>
             <p>abstract:{{blog.pabstract}}</p>
+            <p>publicID:{{blog.publicId}}</p>
+            {{blog.publicId=="Passed"}}
           </el-card>
         </el-timeline-item>
 
@@ -72,7 +75,8 @@ export default {
         aname: "11",
         keyword: "11",
         created: '2020-4-3T10:23:23',
-        status: 0
+        status: 0,
+        publicID:""
       }],
       currentPage: 1,
       total: 0,

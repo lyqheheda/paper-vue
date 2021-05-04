@@ -120,7 +120,7 @@ export default {
         category: "航空航天科学与工程; 计算机软件及计算机应用",
         publicID: "10.27522/d.cnki.gkcgs.2021.000004",
         // download URL !!!!!!!!!attention !!!!!!!!!!!!
-        download:"D:\\da san xia\\212\\demo10-1\\untitled\\src\\main\\resources\\static\\16198002362092 Privacy_【彩云小译】.pdf",
+        download:"D:\\da san xia\\212\\demo10-1\\untitled\\src\\main\\resources\\static\\1619943689308威海校区关于做好疫情防控期间2020年大学生创新创业训练项目立项工作的通知.pdf",
         email:"18983882089@163.com"
       },
       common: "",
@@ -185,7 +185,7 @@ export default {
     handleDownload() {
       var remoteFileSrc = this.paperDetail.download.replace(/\\/g,"/");
       console.log("handle get url", this.paperDetail.download);
-      var remoteIP = "http://10.130.16.1:9000/";
+      var remoteIP = "http://10.129.158.217:9000/";
       this.paperDetail.download = remoteIP + remoteFileSrc.slice(remoteFileSrc.indexOf("static"));
       console.log("return download url", this.paperDetail.download);
     }
@@ -207,7 +207,7 @@ export default {
         _this.paperDetail.pname = res.data.data.paperDetail.pname;
         _this.paperDetail.iname = res.data.data.paperDetail.iname;
         _this.paperDetail.email = res.data.data.paperDetail.email;
-
+        _this.paperDetail.download = res.data.data.paperDetail.fileUrl;
         _this.paperDetail.pabstract = res.data.data.paperDetail.pabstract;
         _this.paperDetail.keyword = res.data.data.paperDetail.keyword;
         _this.paperDetail.category = res.data.data.paperDetail.category;

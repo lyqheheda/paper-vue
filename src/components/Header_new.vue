@@ -1,10 +1,12 @@
 <template>
-  <!-- 
+  <!--
 Author: Lin Yunqi 18722016, 37532197
         Shi Zhancheng 18722025
+Contribution:
+  Lin Yunqi: Data
+  Shi Zhancheng Appearance
 
 This component refers to the header of the website
-
  -->
   <div>
     <el-menu

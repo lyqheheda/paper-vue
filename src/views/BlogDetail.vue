@@ -1,6 +1,9 @@
 <template>
-<!-- 
+<!--
   Author: Lin Yunqi, Shi Zhancheng
+  Contribution:
+    Shi Zhancheng: Design of website ,layout and download function
+    Lin Yunqi: Get data from backend.
   This component is used to exhibit the detail info of a paper
  -->
   <div>
@@ -23,7 +26,6 @@
             <p class="mainText">Category:&nbsp;{{ paper.category }}</p>
             <!-- <p class="mainText">Public ID:&nbsp;{{ paper.public_id }}</p> -->
 
-
           </el-main>
         </el-container>
 
@@ -32,7 +34,7 @@
           <el-button type="primary" @click="handleDownload">Download&nbsp;<i class="el-icon-download"></i></el-button>
           <el-button type="primary" @click="">Contact&nbsp;<i class="el-icon-phone-outline"></i></el-button>
         </el-footer>
- 
+
       </el-container>
     </div>
   </div>
@@ -78,6 +80,8 @@
         this.online_preview_msg = this.online_preview === true? "Open Preview":"Close Preview";
         this.online_preview = !this.online_preview;
       },
+
+      // handle the URL sent from backend
       handleDownload() {
       var remoteFileSrc = this.paper.download.replace(/\\/g,"/");
       console.log("handle get url", this.paper.download);
@@ -90,7 +94,7 @@
 
 
     // Author: Lin Yunqi
-    // This method obtain a parameter in the url and send a GET request to the backend to obtain information 
+    // This method obtain a parameter in the url and send a GET request to the backend to obtain information
     // to be exhibited
     created() {
       const paperId = this.$route.params.blogId
@@ -110,8 +114,6 @@
         _this.paper.author_one = paper.authorDetails[0].aname
         _this.paper.author_two = paper.authorDetails[1].aname
         _this.paper.author_three = paper.authorDetails[2].aname
-
-
 
 
         var MardownIt = require("markdown-it")

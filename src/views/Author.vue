@@ -1,9 +1,12 @@
 <template>
-<!-- 
+<!--
 Author: Lin Yunqi
 This component refers to Paper management page of the website.
 It provides a table of papers submitted by the author.
 The aside body contains a search box and checkbox which provides more accurate classification
+
+Contributor: Shi Zhancheng
+Detail: Layout and CSS.
  -->
 
 
@@ -29,7 +32,7 @@ The aside body contains a search box and checkbox which provides more accurate c
 
         <el-checkbox-group v-model="checkList" class="checkbox" >
 
-          
+
           <el-checkbox label="timeOrder" @change="update" style="margin-left: 10px">
             order by time
           </el-checkbox>
@@ -62,7 +65,7 @@ The aside body contains a search box and checkbox which provides more accurate c
                     size="big"
                 >edit</el-button>
                 <el-button type="text" @click="open(scope.row)">delete</el-button>
-     
+
 
               </template>
             </el-table-column>

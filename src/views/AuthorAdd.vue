@@ -1,8 +1,8 @@
 <template>
-<!-- 
+<!--
   Author: Lin Yunqi, Shi ZhanCheng
   Lin's part: The form of the paper info
-  Shi's part: upload of pdf file
+  Shi's part: upload pdf file
   This component provides code that can be used in both paper-add page and paper-edit page, in the latter one a GET request
   is automatically sent to backend to obtain pre-filled form when the paper is added
   Note that the code of AuthorAdd.vue is basically the same as AuthorEdit.vue, the only difference is that
@@ -67,7 +67,7 @@
 
            </el-main>
         <el-footer>
-       
+
           <el-button type="success" @click="submitForm('paperDetail')" :disabled='disabled'
             >Submit&nbsp;<i class="el-icon-star-off"></i
           ></el-button>
@@ -89,7 +89,7 @@ export default {
 
   data() {
     return {
-      autid:undefined,  
+      autid:undefined,
       disabled:true,
     paperDetail: {
       pname:'',
@@ -108,7 +108,7 @@ export default {
         ],
         category: '',
       file_url:'',
-      
+
       autid_two:'',
       autid_three:'',
         },
@@ -131,7 +131,7 @@ export default {
           autid_three:[
             { required: false, message: 'Please enter', trigger: 'blur' },
           ],
-          
+
         },
 
       authorList: [
@@ -147,13 +147,12 @@ export default {
       squareUrl:
         "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
       ownBlog: false,
-      // 侧边栏显示与隐藏
+      // open and close asider
       hasAside: true,
       asidePrompt: "<<",
-      // 在线预览
+      // preview online
       online_preview: false,
       online_preview_msg: "Preview ON ",
-      // 左侧侧边栏目录显示
     };
   },
   methods: {
@@ -184,16 +183,16 @@ export default {
       // console.log(form)
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          
+
           const _this = this
           this.$axios.post('/author/paperAddDB', form).then(res => {
-            
+
           // console.log('=====res.data.code')
             // console.log(res.data.code)
             alert('submit successfully!')
-          
+
             _this.$router.push("/author")
-        
+
           },
           res=>{
             console.log('???')
@@ -243,12 +242,12 @@ export default {
   // Author: Lin Yunqi
   // This method is used to obtain several parameters in the url and load pre-filled info of the form
   created() {
-    
-    
+
+
     this.autid = this.$store.getters.getUser.aut_id
-     
+
     const pap_id=this.$route.query.pap_id;
-        
+
       if(pap_id){
   const _this = this;
     this.$axios
@@ -258,15 +257,15 @@ export default {
           console.log("=====");
           console.log(res.data.data);
           console.log("=====");
-          
+
           _this.paperDetail.pname=res.data.data.paperDetail.pname
           _this.paperDetail.pabstract=res.data.data.paperDetail.pabstract
           _this.paperDetail.keyword=res.data.data.paperDetail.keyword
           _this.paperDetail.category=res.data.data.paperDetail.category
-          console.log('_this.authorList')         
-   
+          console.log('_this.authorList')
 
-          console.log(_this.authorList)         
+
+          console.log(_this.authorList)
 
 
         },
@@ -275,9 +274,9 @@ export default {
         }
       );
       }
-      
-    
-    
+
+
+
   },
 };
 </script>

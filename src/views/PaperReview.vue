@@ -1,6 +1,6 @@
 <template>
-  <!-- 
-  Author: Shi Zhancheng, LinYunqi
+  <!--
+  Author: Shi Zhancheng, Lin Yunqi
   Shi's part: The appearance of the website
   Lin's part: The data transfer part, including receive paper info and submit comments to backend
 
@@ -43,7 +43,6 @@
         <div></div>
 
         <!--          add comments-->
-
         <div>
           <h1 style="text-align: center">COMMENTS</h1>
           <el-input
@@ -56,13 +55,9 @@
           </el-input>
         </div>
 <!--        reviewer action-->
-<!--        reviewer action-->
         <el-footer style="margin-bottom: 50px;text-align: right">
-
+<!--          download PDF-->
           <el-button type="primary" @click="handleDownload">
-<!--            download tab a-->
-<!--            <a v-bind:href="paperDetail.download" download="paper.pdf" style="text-decoration: none" >-->
-<!--            open window tab a-->
             <a v-bind:href="paperDetail.download" target="_blank" style="text-decoration: none" >
               Download PDF
             </a>
@@ -87,6 +82,7 @@ export default {
     return {
       rev_id: undefined,
       pap_id: undefined,
+      // data used to debug
       authorList: [
         {
           aname: "Lin Yunqi",
@@ -111,17 +107,15 @@ export default {
         },
       ],
       paperDetail: {
-        pname: "航空相机的振动隔离及角振动主动补偿方法研究",
-        iname: "Computer Science and Technology",
-        pabstract:
-          "航空相机作为航空遥感的重要载荷之一,可以通过可见光、红外以及多光谱等多种成像手段获取地面信息,又由于其机动性好、时效性高、目的性强以及投入较低等优点,被世界各国广泛用于资源普查、地形测绘和军事侦察等领域。成像质量作为航空相机最重要的性能指标之一,除了受光学系统自身以及电子学系统的制约,还受载机运动、载机振动和环境条件等多种复杂因素的影响。其中,航空相机的角振动对成像质量影响较为严重,会导致航空相机的视轴出现抖动,从而在其曝光过程中引如像移,造成成像模糊。因此,如何降低角振动对航空相机的影响是研制高性能航空相机必须要解决的关键技术之一。降低角振动对航空相机的影响主要有两种手段:一种是利用减振系统尽可能对角振动的幅值进行衰减;另一种是通过补偿机构对角振动所造成的影响进行主动补偿。减振系统对高频振动的抑制能力较强,而主动补偿的手段对低频角振动的补偿效果明显。只有将这两种手段结合使用才能够在全频段上将角振动的影响降至最低。本文从航空相机减振系统的设计方法和角振动主动补偿方法两个方面开展研究工作:分析了角振动的来源和成因,确认了航空相机的角振动来源不只是外界环境及相机内部运动部件的角振动激励,也有线振动经过减振系统后由于耦合产生的角振动。通过建立航空相机的动力学模型,对航空相机的耦合特性进行了分析,并引入了刚度中心、阻尼中心、刚度矩中心及阻尼矩中心的概念。通过分析刚度中心、阻尼中心、刚度矩中心及阻尼矩中心与质心的重合情况,对减振器的布局和参数选择可能造成的不同耦合形式进行了讨论。通过对减振系统振动传递率的分析,得到了航空相机减振器的布局和参数选择与振动传递率之间的关系。根据对减振系统耦合特性和振动传递率的分析和讨论,提出了一种基于耦合约束、布局约束和性能约束的航空相机被动减振系统的设计方法。利用该方法,针对某型号航空相机设计了减振系统,并利用有限元仿真的方法对其有效性进行了验证。根据对角振动主动补偿方法的研究,建立了主动补偿仿真模型对主动补偿能力进行了仿真分析。利用快速反射镜和光纤陀螺分别作为补偿机构和角振动测量装置搭建了一套航空相机角振动主动补偿验证系统。为了给角振动主动补偿验证系统的测试实验提供稳定可控的角振动激励,本文还设计并搭建了一个基于柔性导向机构的音圈电机驱动角振动发生装置,并进行了验证测试。通过利用安装在角振动发生装置上的高速相机对固定靶标上的十字靶心连续快速采样的方法,对角振动主动补偿验证系统在不同振幅和频率的角振动激励下的补偿实验进行了记录。利用图像处理的手段对采样图片进行处理,得到了十字靶心的中心坐标,并根据中心坐标的变化情况获得了由角振动所引入的视轴抖动程度。通过对比角振动主动补偿机构介入前后靶标中心振幅的变化情况,实现了对角振动主动补偿验证系统的性能评估。经过对角振动幅值分别为0.045°、0.09°、0.135°、0.18°、0.225°和0.27°,频率在5Hz-50Hz的区间、间隔为5Hz的60个不同外界角激励下的主动补偿实验结果进行对比发现:激励幅值相同的情况下,随着激励频率的增加,主动补偿效果不断下降;在频率相同的情况下,随着激励幅值的增加,主动补偿效果不断下降。全部60个不同激励幅值和激励频率的实验中,角振动主动补偿验证系统的振动抑制率均在70%以上,角振动抑制效果良好。为航空相机角振动主动补偿系统的应用打下了技术基础。",
-        keyword:
-          "航空相机减振系统设计方法;振动耦合特性;角振动主动补偿;快速反射镜;角振动发生装置;",
-        category: "航空航天科学与工程; 计算机软件及计算机应用",
-        publicID: "10.27522/d.cnki.gkcgs.2021.000004",
-        // download URL !!!!!!!!!attention !!!!!!!!!!!!
-        download:"D:\\da san xia\\212\\demo10-1\\untitled\\src\\main\\resources\\static\\1619943689308威海校区关于做好疫情防控期间2020年大学生创新创业训练项目立项工作的通知.pdf",
-        email:"18983882089@163.com"
+        pname: "",
+        iname: "",
+        pabstract: "",
+        keyword: "",
+        category: "",
+        publicID: "",
+        // download URL !!!!!!!!!attention when debug!!!!!!!!!!!!
+        download:"",
+        email:""
       },
       common: "",
     };
@@ -172,13 +166,15 @@ export default {
         }
       );
     },
+
+    // Author: Shi Zhancheng
     closeAside() {
       this.asidePrompt = this.hasAside === true ? ">>" : "<<";
       this.hasAside = !this.hasAside;
     },
     onPreveiw() {
       this.online_preview_msg =
-        this.online_preview === true ? "在线预览" : "关闭预览";
+        this.online_preview === true ? "Preview on" : "Preview off";
       this.online_preview = !this.online_preview;
     },
     // this function handle download URL from backend to use in frontend.

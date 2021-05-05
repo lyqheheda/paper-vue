@@ -36,8 +36,8 @@ It contains a searchbox, a pagination button and blocks to show overview informa
             <p>author: {{ blog.autOne }}</p>
             <p>keywords: {{ blog.keyWord }}</p>
             <p>abstract:{{blog.pabstract}}</p>
-            <p>publicID:{{blog.publicId}}</p>
-            {{blog.publicId=="Passed"}}
+            <!-- <p>publicID:{{blog.publicId}}</p>
+            {{blog.publicId=="Passed"}} -->
           </el-card>
         </el-timeline-item>
 

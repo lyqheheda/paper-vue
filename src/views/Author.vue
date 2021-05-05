@@ -180,13 +180,13 @@ export default {
           this.deleteReview(row);
           this.$message({
             type: "success",
-            message: "删除成功!",
+            message: "Delete successfully!",
           });
         })
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消删除",
+            message: "Delete cancel",
           });
         });
     },

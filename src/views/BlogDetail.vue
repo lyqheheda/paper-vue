@@ -74,10 +74,6 @@
         this.asidePrompt = this.hasAside === true? ">>":"<<";
         this.hasAside = !this.hasAside;
       },
-      onPreveiw() {
-        this.online_preview_msg = this.online_preview === true? "Open Preview":"Close Preview";
-        this.online_preview = !this.online_preview;
-      },
       handleDownload() {
       var remoteFileSrc = this.paper.download.replace(/\\/g,"/");
       console.log("handle get url", this.paper.download);

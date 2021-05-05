@@ -18,11 +18,11 @@
         <el-container>
           <el-main>
             <!--            paper main body-->
-            <p>
+            <!-- <p>
               Author:{{ authorList[0].aname }}&nbsp;&nbsp;{{
                 authorList[1].aname
               }}&nbsp;&nbsp;{{ authorList[2].aname }}
-            </p>
+            </p> -->
             <p>{{ paperDetail.iname }}</p>
             <p
               class="mainText"
